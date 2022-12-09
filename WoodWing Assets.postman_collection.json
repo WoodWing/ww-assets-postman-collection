@@ -1,0 +1,507 @@
+{
+	"info": {
+		"_postman_id": "b4c0dff7-0e59-4b31-835e-75d60cf2d1e3",
+		"name": "WoodWing Assets",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2558053"
+	},
+	"item": [
+		{
+			"name": "Metadata Reports",
+			"item": [
+				{
+					"name": "Metadata report call asking for JSON and using a query to get all assets with status of Production",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "authToken=\"eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eJxtU11zmzAQ_C969mTqusWJ3xS4GNUgaZBImnY6DInllCkBB3Cdj8l_78nYYJM-Ie2dbvf2uDeSbprfbElmxMmln8YP8eIlP2_k9OkifnWuGjLaZZRV1mSmJrOfJBIBJMqnESSxDAT1MGWHeRCAhsONupoJnsggnjOuDmisINK3EhJZlQdM-kIL5QuZuAEDrg94SDmdYxiikCmFxdTHiJKAPNfQh8Qls-xyWM31wV2IuLuz0JbASkzGAbVah9VPle9RBadSPHHDj01ojUH6SFx3XihN9bEFXsI6Nk2_Cy7C205nrLQIkzlo3WEKuJdASFnQq5ci0seuJj8E7whdwTX2viO2Uzi1gnEPFJsP4VZ6hFysHV0ECnrde2FUskTRUAbwwYOEdlAELvYf9dc5cIioxn79OLzkR614VNOEeiEbDqBVZ3u5YvOBCuXHWuP4tXAXJ_oPFyQ_mdP-XQia7gjRmVD2Avfhm4gtYDhxW9ZLAsYXXbUbuBz-Xm2BWNknERxPxxVBALttUOTXiNznmSka_bI2uHToJqZV5smtqxWZrdK8NpjS4KaRdJ3tYo9lY-hyWSE0nZyNz88-Tz7hZ9oF_bJu_hNMS7uutN3e17TJysI36dJU37Z2rd2y_JMZe0ZRm9pUnmnSLEfmN7vy_arH6JP9w47_NvvGPKZkVmzyHJ8XeCTbslxus-LBchfYXVNtsBljY-2xeVljWrv6933GalMMX-dt7H1Estp6AfnfrMZIvbk7Tc1SVDp2nAtnevF14oxIcbfqgC9jBMzzeg-cjycT5_0fBUJxUg.0krQzHsbnQeUFnUCGlCuzNhL6nCDWYkeHClopiNrRP4NmcpUP4ST5RdXMhfKqnraH9m1eeVkO7utorgQ2WzVIw\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://demo.woodwingusa.com/metadata/jeff.json?q=status:Production",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"woodwingusa",
+								"com"
+							],
+							"path": [
+								"metadata",
+								"jeff.json"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "status:Production"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Metadata report call asking for CSV and using a query to get all assets with status of Production",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "authToken=\"eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eJxtVNtymzAQ_Rc9u5m4zsXxmwIboxoQIwknaaejIbHcMiHgcmluk3_vysRgkz4wI87ezh7t6o0kTf2brciMgDh-mUxei0V-Rr803I3Zw_OVJqOtR1GmdWoqMvtBBPdBS48K0HHkc-qiyxajjmI81JEfz1kod2gsQajbCHRUFjss8rji0uORdnwGodrhcBNxobR0YIcENKRzDAARMCkxvfxskRFg5SX0Jn7JLJ9omN_xwFnwuPtngU2BmVgU-9SyH2Y_7OUDlXBIxeXX4b4Qki7BRS8qsGDn1UqGpARfdv05sVQ80JFgodIODxWKiJ4AHUepqNoX09WsY6noDQ95cNv5QuhqCCjz-w6tovt3ob_zsC-PFVGfbRF7d4dysdAFyeZD-IouuWBq2JnA4qydAAESetIfPdKIoTJB5MMn4TTtIAEOyiP63zmEIKjCZr04uAz3enOpopq6ARveWkvXNnfF5gMW0ouVwplR3Fkc8N_9YPGDy_2IuxZsMZzKbZyrfRYuOvdruBwOXZsgljZEwP59ONz3Ybs1kvwckfssNXmtXjYG1xHlQrfS_HGqck1m6ySrDLrUuIMk2aRb22NRG7palQidT47GF-Oj8Ql-02ln9Yqq_p81Kewq03azX5M6LXLPJCtTfnuq0ewUxUNq7BlpNZUpXVMnaYa13-xz0D8DMe6fnar9CbMx5jEhs7zJMgzP8UieimL1lOa_bO0c-6vLBtsx1tYe65cNurWPxH3vsW7yYXTW2t5HJK2sGpD9TSu0VM3doWuaINPx2cl0fHJ8cToZkfxu3QHTCQLmebMDvp6fTt7_AVyReLw.X63zfjVhLsamU1a5BXfjxGBaakTFgM9-KWTSiEIf_CJ5_GvfLpMzFpRi7lH4Y2gXFj1PVmF4UdgQoZ8DXSqBNw\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://demo.woodwingusa.com/metadata/jeff.csv?q=status:Production",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"woodwingusa",
+								"com"
+							],
+							"path": [
+								"metadata",
+								"jeff.csv"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "status:Production"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Metadata report call asking for JSON and using the assetPath parameter",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "authToken=\"eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eJxtVNtymzAQ_Rc9u5m4zsXxmwIboxoQIwknaaejIbHcMiHgcmluk3_vysRgkz4wI87ezh7t6o0kTf2brciMgDh-mUxei0V-Rr803I3Zw_OVJqOtR1GmdWoqMvtBBPdBS48K0HHkc-qiyxajjmI81JEfz1kod2gsQajbCHRUFjss8rji0uORdnwGodrhcBNxobR0YIcENKRzDAARMCkxvfxskRFg5SX0Jn7JLJ9omN_xwFnwuPtngU2BmVgU-9SyH2Y_7OUDlXBIxeXX4b4Qki7BRS8qsGDn1UqGpARfdv05sVQ80JFgodIODxWKiJ4AHUepqNoX09WsY6noDQ95cNv5QuhqCCjz-w6tovt3ob_zsC-PFVGfbRF7d4dysdAFyeZD-IouuWBq2JnA4qydAAESetIfPdKIoTJB5MMn4TTtIAEOyiP63zmEIKjCZr04uAz3enOpopq6ARveWkvXNnfF5gMW0ouVwplR3Fkc8N_9YPGDy_2IuxZsMZzKbZyrfRYuOvdruBwOXZsgljZEwP59ONz3Ybs1kvwckfssNXmtXjYG1xHlQrfS_HGqck1m6ySrDLrUuIMk2aRb22NRG7palQidT47GF-Oj8Ql-02ln9Yqq_p81Kewq03azX5M6LXLPJCtTfnuq0ewUxUNq7BlpNZUpXVMnaYa13-xz0D8DMe6fnar9CbMx5jEhs7zJMgzP8UieimL1lOa_bO0c-6vLBtsx1tYe65cNurWPxH3vsW7yYXTW2t5HJK2sGpD9TSu0VM3doWuaINPx2cl0fHJ8cToZkfxu3QHTCQLmebMDvp6fTt7_AVyReLw.X63zfjVhLsamU1a5BXfjxGBaakTFgM9-KWTSiEIf_CJ5_GvfLpMzFpRi7lH4Y2gXFj1PVmF4UdgQoZ8DXSqBNw\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://demo.woodwingusa.com/metadata/jeff.json?assetPath=Demo Zone",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"woodwingusa",
+								"com"
+							],
+							"path": [
+								"metadata",
+								"jeff.json"
+							],
+							"query": [
+								{
+									"key": "assetPath",
+									"value": "Demo Zone"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Metadata report using 'login', JSON and a query",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "6iQ9fqyxapW97t0boKXzXA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://demo.woodwingusa.com/metadata/jeff.json?assetPath=Demo Zone",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"woodwingusa",
+								"com"
+							],
+							"path": [
+								"metadata",
+								"jeff.json"
+							],
+							"query": [
+								{
+									"key": "assetPath",
+									"value": "Demo Zone"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login and Logout",
+			"item": [
+				{
+					"name": "Login using 'apilogin'",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://demo.woodwingusa.com/services/apilogin?username=api&password=E$3W==kw3<t",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"woodwingusa",
+								"com"
+							],
+							"path": [
+								"services",
+								"apilogin"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "api"
+								},
+								{
+									"key": "password",
+									"value": "E$3W==kw3<t"
+								}
+							]
+						},
+						"description": "If there is a API user available then use this login call. "
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "authToken=\"\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://demo.woodwingusa.com/services/logout",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"woodwingusa",
+								"com"
+							],
+							"path": [
+								"services",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login using 'login'",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://demo.woodwingusa.com/services/login?username=woodwing&password=ww",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"woodwingusa",
+								"com"
+							],
+							"path": [
+								"services",
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "woodwing"
+								},
+								{
+									"key": "password",
+									"value": "ww"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout - use with 'Login' call",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://demo.woodwingusa.com/services/logout",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"woodwingusa",
+								"com"
+							],
+							"path": [
+								"services",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Operations",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "FyMNvqi2qyr8hVL2dKvVgr",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Filedata",
+									"value": "data:image/png;base64,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",
+									"type": "text"
+								},
+								{
+									"key": "filename",
+									"value": "Jeff",
+									"type": "text"
+								},
+								{
+									"key": "assetDomain",
+									"value": "image",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Here is a picture of the Grand Haven lighthouse",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://demo.woodwingusa.com/services/create",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"woodwingusa",
+								"com"
+							],
+							"path": [
+								"services",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "authToken=\"eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eJxtU9tu4jAQ_Rc_owq2iBbeTDIbvCSxZTul7GplpcVoow0JzWXZtuq_dxIgXNSn2GfOzDkzGb-TuK7-sBWZkOFbUSVL9_HFp9NxvNtN9U9mOem1jLxIqsSWZPKLSO6DUTMqwUTC59RFSou54IOG4406mvHQCD_yWKiOaEBD6oERIAOmFBK-iCgBmPsAXciZgTPnkT7eWdAwMYGJyKeNzHWRS9FIgdRLgZ62SWeWL8Jz8_uGqBCSP3Q9KE31eRXXsE5K00ce8mDZmYyU5oHxQOsOUxC6BgLK_JN1waW-FJXIYvthSVBwUjyUpIIZRQPhnyZydG9oB0lw0Lk8XT0IQVKNTmdRMA3PTLhUU0PdgF3PzfEZhNo4PPzOvCsXahZpjT9Hc2d-4f94QfGLH3rIC0DTVhCHGYiTwUN4Idkcrmy0ZV3js3B-XS1SDUHC-RQd7vvQbpsiv3vkOU1sVunXrcWlxtkhrbAvTlmsyWQdp6VFSoWbTOJ2Gwq7yStLV6sCobvbm8H9zbfbPn7uuuAsL6svgnHePAe6fx1vcZXk2czGK1v82FUYdvL8b2KbM5qqS1u4toqTFJXfmyfV5HqSR8IsFnS1SbKz5WwWtsmym5hMsjpNsUAWd5bjDFuriho7sQ28P1av26bhlvF8Yqzr7Cwx3cMfPZKUzQwg_ZeUGCnrp46VxGhuMBqNR_fj0aDfI9nTugOGYwTs_-0BGA-Gg_7HJ_PHPm8.F33CAGxxCQfe2DUDlSDb7hyWytprlyy2zRCwoIXCuTHX7qlrrxabZ4Bn_IYn91bYhJhYJuMPHTtVaTjPavx6-Q\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://demo.woodwingusa.com/services/search?q=apollo",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"woodwingusa",
+								"com"
+							],
+							"path": [
+								"services",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "apollo"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "authToken=\"eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eJxtU9tu4jAQ_Rc_owq2iBbeTDIbvCSxZTul7GplpcVoow0JzWXZtuq_dxIgXNSn2GfOzDkzGb-TuK7-sBWZkOFbUSVL9_HFp9NxvNtN9U9mOem1jLxIqsSWZPKLSO6DUTMqwUTC59RFSou54IOG4406mvHQCD_yWKiOaEBD6oERIAOmFBK-iCgBmPsAXciZgTPnkT7eWdAwMYGJyKeNzHWRS9FIgdRLgZ62SWeWL8Jz8_uGqBCSP3Q9KE31eRXXsE5K00ce8mDZmYyU5oHxQOsOUxC6BgLK_JN1waW-FJXIYvthSVBwUjyUpIIZRQPhnyZydG9oB0lw0Lk8XT0IQVKNTmdRMA3PTLhUU0PdgF3PzfEZhNo4PPzOvCsXahZpjT9Hc2d-4f94QfGLH3rIC0DTVhCHGYiTwUN4Idkcrmy0ZV3js3B-XS1SDUHC-RQd7vvQbpsiv3vkOU1sVunXrcWlxtkhrbAvTlmsyWQdp6VFSoWbTOJ2Gwq7yStLV6sCobvbm8H9zbfbPn7uuuAsL6svgnHePAe6fx1vcZXk2czGK1v82FUYdvL8b2KbM5qqS1u4toqTFJXfmyfV5HqSR8IsFnS1SbKz5WwWtsmym5hMsjpNsUAWd5bjDFuriho7sQ28P1av26bhlvF8Yqzr7Cwx3cMfPZKUzQwg_ZeUGCnrp46VxGhuMBqNR_fj0aDfI9nTugOGYwTs_-0BGA-Gg_7HJ_PHPm8.F33CAGxxCQfe2DUDlSDb7hyWytprlyy2zRCwoIXCuTHX7qlrrxabZ4Bn_IYn91bYhJhYJuMPHTtVaTjPavx6-Q\"",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://demo.woodwingusa.com/services/copy?source=/Demo Files/Space/Apollo/Images/Apollo 1.jpg&target=/Demo Files/Space/Apollo/Images/Apollo 2-1.jpg",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"woodwingusa",
+								"com"
+							],
+							"path": [
+								"services",
+								"copy"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "/Demo Files/Space/Apollo/Images/Apollo 1.jpg"
+								},
+								{
+									"key": "target",
+									"value": "/Demo Files/Space/Apollo/Images/Apollo 2-1.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Relation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://demo.woodwingusa.com/services/?relationType&target1Id&target2Id",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"woodwingusa",
+								"com"
+							],
+							"path": [
+								"services",
+								""
+							],
+							"query": [
+								{
+									"key": "relationType",
+									"value": null
+								},
+								{
+									"key": "target1Id",
+									"value": null
+								},
+								{
+									"key": "target2Id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Checkout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "4uul3D15aMJBmvXO94zQ2U",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://demo.woodwingusa.com/services/checkout/4fiKrpWsaN1ARGAut1jyKU?=4fiKrpWsaN1ARGAut1jyKU",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"woodwingusa",
+								"com"
+							],
+							"path": [
+								"services",
+								"checkout",
+								"4fiKrpWsaN1ARGAut1jyKU"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "4fiKrpWsaN1ARGAut1jyKU",
+									"description": "format is 'checkout/assetId'"
+								},
+								{
+									"key": "assetPath",
+									"value": "/Demo Zone/Jeff/Blue Mosque Istanbul.jpg",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Undo Checkout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://demo.woodwingusa.com/services/undocheckout/4fiKrpWsaN1ARGAut1jyKU",
+							"protocol": "https",
+							"host": [
+								"demo",
+								"woodwingusa",
+								"com"
+							],
+							"path": [
+								"services",
+								"undocheckout",
+								"4fiKrpWsaN1ARGAut1jyKU"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
