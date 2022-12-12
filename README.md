@@ -2,8 +2,9 @@
 A Postman collection for working with WoodWing Assets
 
 ## Calls contained within the collection
-1. Login and Logout
-a. Login Using 'apilogin'
-b. Logout
-c. Login using 'login'
-d. Logout
+
+### Login and Logout
+1. Login Using 'apilogin'
+2. Logout
+3. Login using 'login'
+4. Logout
