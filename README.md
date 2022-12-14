@@ -55,3 +55,23 @@ v0.1 - Initial release of the collection
 4. Create Relation
 5. Checkout
 6. Undo Checkout
+
+### Calls not yet included
+1. browse
+2. createAuthKey
+3. createFolder
+4. E-mail
+5. localization
+6. log usage stats
+7. move / rename
+8. profile
+9. promote
+10. remove
+11. remove relation
+12. Rendition Presets
+13. revokeAuthKeys
+14. updateAuthKey
+15. updatebulk
+16. update / check-in
+17. versioning and history
+18. Zip Download
