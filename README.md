@@ -11,7 +11,7 @@ When creating this collection we considered three parts of Postman's capabilitie
 2. Environments
 3. Flows (part of Postman 10)
 
-Please note that to use this collection you will need to create your Environment and, if you wish to use Flows, you'll need to create those as well. 
+Please note that to use this collection you will need to create your Environment and, if you wish to use Flows, you'll need to create those as well. Farther down we have included videos to help out with that process.
 
 The relationship between the Collection and the Environments is particularly helpful. Environments allows us to create variables, attach values to the variables and then pass the variable value(s) to subsequent calls. The variables can be used calling each individual call within the collection or you can set up a Flow to use them.
 
