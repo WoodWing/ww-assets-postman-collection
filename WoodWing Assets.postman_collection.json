@@ -7,6 +7,128 @@
 	},
 	"item": [
 		{
+			"name": "Login and Logout",
+			"item": [
+				{
+					"name": "Login using 'apilogin'",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{Assets_Server_URL}}/services/apilogin?username={{username}}&password={{password}}",
+							"host": [
+								"{{Assets_Server_URL}}"
+							],
+							"path": [
+								"services",
+								"apilogin"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"description": "Enter your user name for your API User"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"description": "Enter your password for your API User"
+								}
+							]
+						},
+						"description": "If there is a API user available then use this login call. "
+					},
+					"response": []
+				},
+				{
+					"name": "Logout use with 'api'",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Assets_Server_URL}}/services/logout",
+							"host": [
+								"{{Assets_Server_URL}}"
+							],
+							"path": [
+								"services",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login using 'login'",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{Assets_Server_URL}}/services/login?username={{username}}&password={{password}}",
+							"host": [
+								"{{Assets_Server_URL}}"
+							],
+							"path": [
+								"services",
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"description": "Enter your user name"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"description": "Enter your user password"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout - use with 'Login' call",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "{{Current X-CRSF-TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Assets_Server_URL}}/services/logout",
+							"host": [
+								"{{Assets_Server_URL}}"
+							],
+							"path": [
+								"services",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Metadata Reports",
 			"item": [
 				{
@@ -15,18 +137,15 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "Cookie",
-								"value": "authToken=\"eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eJxtU11zmzAQ_C969mTqusWJ3xS4GNUgaZBImnY6DInllCkBB3Cdj8l_78nYYJM-Ie2dbvf2uDeSbprfbElmxMmln8YP8eIlP2_k9OkifnWuGjLaZZRV1mSmJrOfJBIBJMqnESSxDAT1MGWHeRCAhsONupoJnsggnjOuDmisINK3EhJZlQdM-kIL5QuZuAEDrg94SDmdYxiikCmFxdTHiJKAPNfQh8Qls-xyWM31wV2IuLuz0JbASkzGAbVah9VPle9RBadSPHHDj01ojUH6SFx3XihN9bEFXsI6Nk2_Cy7C205nrLQIkzlo3WEKuJdASFnQq5ci0seuJj8E7whdwTX2viO2Uzi1gnEPFJsP4VZ6hFysHV0ECnrde2FUskTRUAbwwYOEdlAELvYf9dc5cIioxn79OLzkR614VNOEeiEbDqBVZ3u5YvOBCuXHWuP4tXAXJ_oPFyQ_mdP-XQia7gjRmVD2Avfhm4gtYDhxW9ZLAsYXXbUbuBz-Xm2BWNknERxPxxVBALttUOTXiNznmSka_bI2uHToJqZV5smtqxWZrdK8NpjS4KaRdJ3tYo9lY-hyWSE0nZyNz88-Tz7hZ9oF_bJu_hNMS7uutN3e17TJysI36dJU37Z2rd2y_JMZe0ZRm9pUnmnSLEfmN7vy_arH6JP9w47_NvvGPKZkVmzyHJ8XeCTbslxus-LBchfYXVNtsBljY-2xeVljWrv6933GalMMX-dt7H1Estp6AfnfrMZIvbk7Tc1SVDp2nAtnevF14oxIcbfqgC9jBMzzeg-cjycT5_0fBUJxUg.0krQzHsbnQeUFnUCGlCuzNhL6nCDWYkeHClopiNrRP4NmcpUP4ST5RdXMhfKqnraH9m1eeVkO7utorgQ2WzVIw\"",
+								"key": "X-CSRF-TOKEN",
+								"value": "{{Current X-CRSF-TOKEN}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "https://demo.woodwingusa.com/metadata/jeff.json?q=status:Production",
-							"protocol": "https",
+							"raw": "{{Assets_Server_URL}}/metadata/jeff.json?q=status:Production",
 							"host": [
-								"demo",
-								"woodwingusa",
-								"com"
+								"{{Assets_Server_URL}}"
 							],
 							"path": [
 								"metadata",
@@ -48,18 +167,15 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "Cookie",
-								"value": "authToken=\"eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eJxtVNtymzAQ_Rc9u5m4zsXxmwIboxoQIwknaaejIbHcMiHgcmluk3_vysRgkz4wI87ezh7t6o0kTf2brciMgDh-mUxei0V-Rr803I3Zw_OVJqOtR1GmdWoqMvtBBPdBS48K0HHkc-qiyxajjmI81JEfz1kod2gsQajbCHRUFjss8rji0uORdnwGodrhcBNxobR0YIcENKRzDAARMCkxvfxskRFg5SX0Jn7JLJ9omN_xwFnwuPtngU2BmVgU-9SyH2Y_7OUDlXBIxeXX4b4Qki7BRS8qsGDn1UqGpARfdv05sVQ80JFgodIODxWKiJ4AHUepqNoX09WsY6noDQ95cNv5QuhqCCjz-w6tovt3ob_zsC-PFVGfbRF7d4dysdAFyeZD-IouuWBq2JnA4qydAAESetIfPdKIoTJB5MMn4TTtIAEOyiP63zmEIKjCZr04uAz3enOpopq6ARveWkvXNnfF5gMW0ouVwplR3Fkc8N_9YPGDy_2IuxZsMZzKbZyrfRYuOvdruBwOXZsgljZEwP59ONz3Ybs1kvwckfssNXmtXjYG1xHlQrfS_HGqck1m6ySrDLrUuIMk2aRb22NRG7palQidT47GF-Oj8Ql-02ln9Yqq_p81Kewq03azX5M6LXLPJCtTfnuq0ewUxUNq7BlpNZUpXVMnaYa13-xz0D8DMe6fnar9CbMx5jEhs7zJMgzP8UieimL1lOa_bO0c-6vLBtsx1tYe65cNurWPxH3vsW7yYXTW2t5HJK2sGpD9TSu0VM3doWuaINPx2cl0fHJ8cToZkfxu3QHTCQLmebMDvp6fTt7_AVyReLw.X63zfjVhLsamU1a5BXfjxGBaakTFgM9-KWTSiEIf_CJ5_GvfLpMzFpRi7lH4Y2gXFj1PVmF4UdgQoZ8DXSqBNw\"",
+								"key": "X-CSRF-TOKEN",
+								"value": "4-NnnjG5K6P9QIgzswLaxO",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "https://demo.woodwingusa.com/metadata/jeff.csv?q=status:Production",
-							"protocol": "https",
+							"raw": "{{Assets_Server_URL}}/metadata/jeff.csv?q=status:Production",
 							"host": [
-								"demo",
-								"woodwingusa",
-								"com"
+								"{{Assets_Server_URL}}"
 							],
 							"path": [
 								"metadata",
@@ -68,7 +184,8 @@
 							"query": [
 								{
 									"key": "q",
-									"value": "status:Production"
+									"value": "status:Production",
+									"description": "Query for repor that asks for all assets whose status is 'production'"
 								}
 							]
 						}
@@ -81,191 +198,57 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "Cookie",
-								"value": "authToken=\"eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eJxtVNtymzAQ_Rc9u5m4zsXxmwIboxoQIwknaaejIbHcMiHgcmluk3_vysRgkz4wI87ezh7t6o0kTf2brciMgDh-mUxei0V-Rr803I3Zw_OVJqOtR1GmdWoqMvtBBPdBS48K0HHkc-qiyxajjmI81JEfz1kod2gsQajbCHRUFjss8rji0uORdnwGodrhcBNxobR0YIcENKRzDAARMCkxvfxskRFg5SX0Jn7JLJ9omN_xwFnwuPtngU2BmVgU-9SyH2Y_7OUDlXBIxeXX4b4Qki7BRS8qsGDn1UqGpARfdv05sVQ80JFgodIODxWKiJ4AHUepqNoX09WsY6noDQ95cNv5QuhqCCjz-w6tovt3ob_zsC-PFVGfbRF7d4dysdAFyeZD-IouuWBq2JnA4qydAAESetIfPdKIoTJB5MMn4TTtIAEOyiP63zmEIKjCZr04uAz3enOpopq6ARveWkvXNnfF5gMW0ouVwplR3Fkc8N_9YPGDy_2IuxZsMZzKbZyrfRYuOvdruBwOXZsgljZEwP59ONz3Ybs1kvwckfssNXmtXjYG1xHlQrfS_HGqck1m6ySrDLrUuIMk2aRb22NRG7palQidT47GF-Oj8Ql-02ln9Yqq_p81Kewq03azX5M6LXLPJCtTfnuq0ewUxUNq7BlpNZUpXVMnaYa13-xz0D8DMe6fnar9CbMx5jEhs7zJMgzP8UieimL1lOa_bO0c-6vLBtsx1tYe65cNurWPxH3vsW7yYXTW2t5HJK2sGpD9TSu0VM3doWuaINPx2cl0fHJ8cToZkfxu3QHTCQLmebMDvp6fTt7_AVyReLw.X63zfjVhLsamU1a5BXfjxGBaakTFgM9-KWTSiEIf_CJ5_GvfLpMzFpRi7lH4Y2gXFj1PVmF4UdgQoZ8DXSqBNw\"",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://demo.woodwingusa.com/metadata/jeff.json?assetPath=Demo Zone",
-							"protocol": "https",
-							"host": [
-								"demo",
-								"woodwingusa",
-								"com"
-							],
-							"path": [
-								"metadata",
-								"jeff.json"
-							],
-							"query": [
-								{
-									"key": "assetPath",
-									"value": "Demo Zone"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Metadata report using 'login', JSON and a query",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "6iQ9fqyxapW97t0boKXzXA",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://demo.woodwingusa.com/metadata/jeff.json?assetPath=Demo Zone",
-							"protocol": "https",
-							"host": [
-								"demo",
-								"woodwingusa",
-								"com"
-							],
-							"path": [
-								"metadata",
-								"jeff.json"
-							],
-							"query": [
-								{
-									"key": "assetPath",
-									"value": "Demo Zone"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Login and Logout",
-			"item": [
-				{
-					"name": "Login using 'apilogin'",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://demo.woodwingusa.com/services/apilogin?username=api&password=E$3W==kw3<t",
-							"protocol": "https",
-							"host": [
-								"demo",
-								"woodwingusa",
-								"com"
-							],
-							"path": [
-								"services",
-								"apilogin"
-							],
-							"query": [
-								{
-									"key": "username",
-									"value": "api"
-								},
-								{
-									"key": "password",
-									"value": "E$3W==kw3<t"
-								}
-							]
-						},
-						"description": "If there is a API user available then use this login call. "
-					},
-					"response": []
-				},
-				{
-					"name": "Logout",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Cookie",
-								"value": "authToken=\"\"",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://demo.woodwingusa.com/services/logout",
-							"protocol": "https",
-							"host": [
-								"demo",
-								"woodwingusa",
-								"com"
-							],
-							"path": [
-								"services",
-								"logout"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Login using 'login'",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://demo.woodwingusa.com/services/login?username=woodwing&password=ww",
-							"protocol": "https",
-							"host": [
-								"demo",
-								"woodwingusa",
-								"com"
-							],
-							"path": [
-								"services",
-								"login"
-							],
-							"query": [
-								{
-									"key": "username",
-									"value": "woodwing"
-								},
-								{
-									"key": "password",
-									"value": "ww"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Logout - use with 'Login' call",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
 								"key": "X-CSRF-TOKEN",
 								"value": "",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "https://demo.woodwingusa.com/services/logout",
-							"protocol": "https",
+							"raw": "{{Assets_Server_URL}}/metadata/jeff.json?assetPath=",
 							"host": [
-								"demo",
-								"woodwingusa",
-								"com"
+								"{{Assets_Server_URL}}"
 							],
 							"path": [
-								"services",
-								"logout"
+								"metadata",
+								"jeff.json"
+							],
+							"query": [
+								{
+									"key": "assetPath",
+									"value": "",
+									"description": "This is the path to the Assets you want to report on"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Metadata report using 'login', JSON and a 'assetPath' query",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "{{Current X-CRSF-TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Assets_Server_URL}}/metadata/jeff.json?assetPath=",
+							"host": [
+								"{{Assets_Server_URL}}"
+							],
+							"path": [
+								"metadata",
+								"jeff.json"
+							],
+							"query": [
+								{
+									"key": "assetPath",
+									"value": "",
+									"description": "Path to Assets in your system that you want to generate a report from"
+								}
 							]
 						}
 					},
@@ -283,7 +266,8 @@
 						"header": [
 							{
 								"key": "X-CSRF-TOKEN",
-								"value": "FyMNvqi2qyr8hVL2dKvVgr",
+								"value": "{{Current X-CRSF-TOKEN}}",
+								"description": "Use the X-CSRF-TOKEN value from your login",
 								"type": "text"
 							}
 						],
@@ -313,12 +297,9 @@
 							]
 						},
 						"url": {
-							"raw": "https://demo.woodwingusa.com/services/create",
-							"protocol": "https",
+							"raw": "{{Assets_Server_URL}}/services/create",
 							"host": [
-								"demo",
-								"woodwingusa",
-								"com"
+								"{{Assets_Server_URL}}"
 							],
 							"path": [
 								"services",
@@ -334,18 +315,15 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "Cookie",
-								"value": "authToken=\"eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eJxtU9tu4jAQ_Rc_owq2iBbeTDIbvCSxZTul7GplpcVoow0JzWXZtuq_dxIgXNSn2GfOzDkzGb-TuK7-sBWZkOFbUSVL9_HFp9NxvNtN9U9mOem1jLxIqsSWZPKLSO6DUTMqwUTC59RFSou54IOG4406mvHQCD_yWKiOaEBD6oERIAOmFBK-iCgBmPsAXciZgTPnkT7eWdAwMYGJyKeNzHWRS9FIgdRLgZ62SWeWL8Jz8_uGqBCSP3Q9KE31eRXXsE5K00ce8mDZmYyU5oHxQOsOUxC6BgLK_JN1waW-FJXIYvthSVBwUjyUpIIZRQPhnyZydG9oB0lw0Lk8XT0IQVKNTmdRMA3PTLhUU0PdgF3PzfEZhNo4PPzOvCsXahZpjT9Hc2d-4f94QfGLH3rIC0DTVhCHGYiTwUN4Idkcrmy0ZV3js3B-XS1SDUHC-RQd7vvQbpsiv3vkOU1sVunXrcWlxtkhrbAvTlmsyWQdp6VFSoWbTOJ2Gwq7yStLV6sCobvbm8H9zbfbPn7uuuAsL6svgnHePAe6fx1vcZXk2czGK1v82FUYdvL8b2KbM5qqS1u4toqTFJXfmyfV5HqSR8IsFnS1SbKz5WwWtsmym5hMsjpNsUAWd5bjDFuriho7sQ28P1av26bhlvF8Yqzr7Cwx3cMfPZKUzQwg_ZeUGCnrp46VxGhuMBqNR_fj0aDfI9nTugOGYwTs_-0BGA-Gg_7HJ_PHPm8.F33CAGxxCQfe2DUDlSDb7hyWytprlyy2zRCwoIXCuTHX7qlrrxabZ4Bn_IYn91bYhJhYJuMPHTtVaTjPavx6-Q\"",
+								"key": "X-CSRF-TOKEN",
+								"value": "{{Current X-CRSF-TOKEN}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "https://demo.woodwingusa.com/services/search?q=apollo",
-							"protocol": "https",
+							"raw": "{{Assets_Server_URL}}/services/search?q=apollo",
 							"host": [
-								"demo",
-								"woodwingusa",
-								"com"
+								"{{Assets_Server_URL}}"
 							],
 							"path": [
 								"services",
@@ -354,7 +332,8 @@
 							"query": [
 								{
 									"key": "q",
-									"value": "apollo"
+									"value": "apollo",
+									"description": "Query asking for Assets with the value of 'apollo'"
 								}
 							]
 						}
@@ -367,8 +346,8 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "Cookie",
-								"value": "authToken=\"eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eJxtU9tu4jAQ_Rc_owq2iBbeTDIbvCSxZTul7GplpcVoow0JzWXZtuq_dxIgXNSn2GfOzDkzGb-TuK7-sBWZkOFbUSVL9_HFp9NxvNtN9U9mOem1jLxIqsSWZPKLSO6DUTMqwUTC59RFSou54IOG4406mvHQCD_yWKiOaEBD6oERIAOmFBK-iCgBmPsAXciZgTPnkT7eWdAwMYGJyKeNzHWRS9FIgdRLgZ62SWeWL8Jz8_uGqBCSP3Q9KE31eRXXsE5K00ce8mDZmYyU5oHxQOsOUxC6BgLK_JN1waW-FJXIYvthSVBwUjyUpIIZRQPhnyZydG9oB0lw0Lk8XT0IQVKNTmdRMA3PTLhUU0PdgF3PzfEZhNo4PPzOvCsXahZpjT9Hc2d-4f94QfGLH3rIC0DTVhCHGYiTwUN4Idkcrmy0ZV3js3B-XS1SDUHC-RQd7vvQbpsiv3vkOU1sVunXrcWlxtkhrbAvTlmsyWQdp6VFSoWbTOJ2Gwq7yStLV6sCobvbm8H9zbfbPn7uuuAsL6svgnHePAe6fx1vcZXk2czGK1v82FUYdvL8b2KbM5qqS1u4toqTFJXfmyfV5HqSR8IsFnS1SbKz5WwWtsmym5hMsjpNsUAWd5bjDFuriho7sQ28P1av26bhlvF8Yqzr7Cwx3cMfPZKUzQwg_ZeUGCnrp46VxGhuMBqNR_fj0aDfI9nTugOGYwTs_-0BGA-Gg_7HJ_PHPm8.F33CAGxxCQfe2DUDlSDb7hyWytprlyy2zRCwoIXCuTHX7qlrrxabZ4Bn_IYn91bYhJhYJuMPHTtVaTjPavx6-Q\"",
+								"key": "X-CSRF-TOKEN",
+								"value": "{{Current X-CRSF-TOKEN}}",
 								"type": "text"
 							},
 							{
@@ -379,12 +358,9 @@
 							}
 						],
 						"url": {
-							"raw": "https://demo.woodwingusa.com/services/copy?source=/Demo Files/Space/Apollo/Images/Apollo 1.jpg&target=/Demo Files/Space/Apollo/Images/Apollo 2-1.jpg",
-							"protocol": "https",
+							"raw": "{{Assets_Server_URL}}/services/copy?source=&target=",
 							"host": [
-								"demo",
-								"woodwingusa",
-								"com"
+								"{{Assets_Server_URL}}"
 							],
 							"path": [
 								"services",
@@ -393,11 +369,13 @@
 							"query": [
 								{
 									"key": "source",
-									"value": "/Demo Files/Space/Apollo/Images/Apollo 1.jpg"
+									"value": "",
+									"description": "The source image TO copy. This is the assetPath value"
 								},
 								{
 									"key": "target",
-									"value": "/Demo Files/Space/Apollo/Images/Apollo 2-1.jpg"
+									"value": "",
+									"description": "The destination path of the file plus the name"
 								}
 							]
 						}
@@ -408,14 +386,17 @@
 					"name": "Create Relation",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "{{Current X-CRSF-TOKEN}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "https://demo.woodwingusa.com/services/?relationType&target1Id&target2Id",
-							"protocol": "https",
+							"raw": "{{Assets_Server_URL}}/services/?relationType&target1Id&target2Id",
 							"host": [
-								"demo",
-								"woodwingusa",
-								"com"
+								"{{Assets_Server_URL}}"
 							],
 							"path": [
 								"services",
@@ -424,7 +405,8 @@
 							"query": [
 								{
 									"key": "relationType",
-									"value": null
+									"value": null,
+									"description": "Values include: 'variation'"
 								},
 								{
 									"key": "target1Id",
@@ -446,17 +428,15 @@
 						"header": [
 							{
 								"key": "X-CSRF-TOKEN",
-								"value": "4uul3D15aMJBmvXO94zQ2U",
+								"value": "{{Current X-CRSF-TOKEN}}",
+								"description": "Get the token from the login values returned",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "https://demo.woodwingusa.com/services/checkout/4fiKrpWsaN1ARGAut1jyKU?=4fiKrpWsaN1ARGAut1jyKU",
-							"protocol": "https",
+							"raw": "{{Assets_Server_URL}}/services/checkout/4fiKrpWsaN1ARGAut1jyKU",
 							"host": [
-								"demo",
-								"woodwingusa",
-								"com"
+								"{{Assets_Server_URL}}"
 							],
 							"path": [
 								"services",
@@ -464,11 +444,6 @@
 								"4fiKrpWsaN1ARGAut1jyKU"
 							],
 							"query": [
-								{
-									"key": "",
-									"value": "4fiKrpWsaN1ARGAut1jyKU",
-									"description": "format is 'checkout/assetId'"
-								},
 								{
 									"key": "assetPath",
 									"value": "/Demo Zone/Jeff/Blue Mosque Istanbul.jpg",
@@ -483,25 +458,71 @@
 					"name": "Undo Checkout",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "https://demo.woodwingusa.com/services/undocheckout/4fiKrpWsaN1ARGAut1jyKU",
-							"protocol": "https",
+							"raw": "{{Assets_Server_URL}}/services/undocheckout/4fiKrpWsaN1ARGAut1jyKU",
 							"host": [
-								"demo",
-								"woodwingusa",
-								"com"
+								"{{Assets_Server_URL}}"
 							],
 							"path": [
 								"services",
 								"undocheckout",
 								"4fiKrpWsaN1ARGAut1jyKU"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
 							]
 						}
 					},
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "{{Assets_Server_URL}}",
+			"value": ""
+		},
+		{
+			"key": "{{username}}",
+			"value": "woodwing",
+			"type": "string"
+		},
+		{
+			"key": "{{password}}",
+			"value": "ww",
+			"type": "string"
 		}
 	]
 }
