@@ -27,7 +27,7 @@ Here is a short video showing how Collections and Environments work:
 
 
 # Flows
-Flows all for the creation of a complete set of calls and responses to the API endpoint. Seeing is believing so here is a short video showing the basic creation and usage of a Flow using the Collection and the Environment:
+Flows are for the creation of a complete set of calls and responses to the API endpoint. Seeing is believing so here is a short video showing the basic creation and usage of a Flow using the Collection and the Environment:
 
 
 
