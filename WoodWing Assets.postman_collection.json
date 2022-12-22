@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\":\"api.user\",\n    \"password\":\"T24b~+xhNx+7-5j\"\n}",
+							"raw": "{\n    \"username\":\"\",\n    \"password\":\""\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -38,13 +38,13 @@
 							"query": [
 								{
 									"key": "username",
-									"value": "api.user",
+									"value": "",
 									"description": "Enter your user name for your API User",
 									"disabled": true
 								},
 								{
 									"key": "password",
-									"value": "T24b~+xhNx+7-5j",
+									"value": "",
 									"description": "Enter your password for your API User",
 									"disabled": true
 								},
