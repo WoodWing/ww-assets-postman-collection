@@ -33,6 +33,7 @@ Flows are for the creation of a complete set of calls and responses to the API e
 
 ## Release Notes
 v0.1 - Initial release of the collection
+v0.2 - Extensive changes to the collection. All 'Assets' calls are now included in the collection. I've added a variety of variables to an environment and use those variables through the collection. Will document those ASAP.
 
 ## Calls contained within the collection
 
