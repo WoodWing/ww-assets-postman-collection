@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\":\"\",\n    \"password\":\""\n}",
+							"raw": "{\n    \"username\":\"api.user\",\n    \"password\":\"T24b~+xhNx+7-5j\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,12 +24,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://demo.woodwingusa.com/services/apilogin",
-							"protocol": "http",
+							"raw": "{{Assets_Server_URL}}/services/apilogin?username={{api_user_name}}&password={{api_password}}",
 							"host": [
-								"demo",
-								"woodwingusa",
-								"com"
+								"{{Assets_Server_URL}}"
 							],
 							"path": [
 								"services",
@@ -38,15 +35,13 @@
 							"query": [
 								{
 									"key": "username",
-									"value": "",
-									"description": "Enter your user name for your API User",
-									"disabled": true
+									"value": "{{api_user_name}}",
+									"description": "Enter your user name for your API User"
 								},
 								{
 									"key": "password",
-									"value": "",
-									"description": "Enter your password for your API User",
-									"disabled": true
+									"value": "{{api_password}}",
+									"description": "Enter your password for your API User"
 								},
 								{
 									"key": "clientId",
@@ -276,1323 +271,1353 @@
 			"name": "Operations",
 			"item": [
 				{
-					"name": "Create",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"description": "Use the X-CSRF-TOKEN value from your login",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "Filedata",
-									"value": "data:image/png;base64,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",
-									"type": "text"
-								},
-								{
-									"key": "filename",
-									"value": "Jeff",
-									"type": "text"
-								},
-								{
-									"key": "assetDomain",
-									"value": "image",
-									"type": "text"
-								},
-								{
-									"key": "description",
-									"value": "Here is a picture of the Grand Haven lighthouse",
-									"type": "text"
+					"name": "Search and Browse",
+					"item": [
+						{
+							"name": "Browse",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/browse?path&fromRoot&includeFolders&includeAssets&includeExtensions",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"browse"
+									],
+									"query": [
+										{
+											"key": "path",
+											"value": null,
+											"description": "assetPath"
+										},
+										{
+											"key": "fromRoot",
+											"value": null,
+											"description": "folderPath"
+										},
+										{
+											"key": "includeFolders",
+											"value": null,
+											"description": "true/false"
+										},
+										{
+											"key": "includeAssets",
+											"value": null,
+											"description": "true/false"
+										},
+										{
+											"key": "includeExtensions",
+											"value": null,
+											"description": "Comma-delimited list of extensions"
+										}
+									]
 								}
-							]
-						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/create",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"create"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Search",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/search?q=apollo",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"search"
-							],
-							"query": [
-								{
-									"key": "q",
-									"value": "apollo",
-									"description": "Required. Query asking for Assets with the value of 'apollo'. Lots of ways to query. Start here for docs: https://helpcenter.woodwing.com/hc/en-us/articles/360041851432"
-								},
-								{
-									"key": "start",
-									"value": null,
-									"description": "Optional First hit to be returned. Starting at 0 for the first hit. Used for paging",
-									"disabled": true
-								},
-								{
-									"key": "num",
-									"value": null,
-									"description": "Optional. Number of hits to return. Default is 50. 0 returns no hits.",
-									"disabled": true
-								},
-								{
-									"key": "sort",
-									"value": null,
-									"description": "Optional. The sort order of returned hits. Comma-delimited list of fields to sort on.\n",
-									"disabled": true
-								},
-								{
-									"key": "metadataToReturn",
-									"value": null,
-									"description": "Optional. For all fields use 'metadataToReturn=all', Leave null for only minimal fields. Default returns all fields. ",
-									"disabled": true
-								},
-								{
-									"key": "facets",
-									"value": null,
-									"description": "Optional. Comma-delimited list fiels to return facets for. Ex: facets=tags,assetDomain",
-									"disabled": true
-								},
-								{
-									"key": "facet.<field>.selection",
-									"value": null,
-									"description": "Optional. Replace <field> with the appropriate field you want. Ex: facet.assetDomain.selection=image,video\n",
-									"disabled": true
-								},
-								{
-									"key": "appendRequestSecret",
-									"value": null,
-									"description": "Optional. Default is false. Use when retrieving thumb, preview or original URL's and you won't need to authenticate against the server again.",
-									"disabled": true
-								},
-								{
-									"key": "returnHighlightedText",
-									"value": null,
-									"description": "Optional. Default is true. Any found text is highlighted.",
-									"disabled": true
-								},
-								{
-									"key": "returnThumbnailHits",
-									"value": null,
-									"description": "Optional. Default for 6.75 and higher is false, 6.74 and lower true.  Collections returned in the results have an additional array with up to 4 thumbnailHits",
-									"disabled": true
-								},
-								{
-									"key": "logSearch",
-									"value": null,
-									"description": "Optional. Default is true. When set to true, an entry for this search is written to the Stats index.",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Copy",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
 							},
-							{
-								"key": "",
-								"value": "",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/copy?source=&target=",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"copy"
-							],
-							"query": [
-								{
-									"key": "source",
-									"value": "",
-									"description": "The source image TO copy. This is the assetPath value"
-								},
-								{
-									"key": "target",
-									"value": "",
-									"description": "The destination path of the file plus the name"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Relation",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/?relationType&target1Id&target2Id",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								""
-							],
-							"query": [
-								{
-									"key": "relationType",
-									"value": null,
-									"description": "Values include: 'variation'"
-								},
-								{
-									"key": "target1Id",
-									"value": null
-								},
-								{
-									"key": "target2Id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Checkout",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"description": "Get the token from the login values returned",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/checkout/4fiKrpWsaN1ARGAut1jyKU",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"checkout",
-								"4fiKrpWsaN1ARGAut1jyKU"
-							],
-							"query": [
-								{
-									"key": "assetPath",
-									"value": "/Demo Zone/Jeff/Blue Mosque Istanbul.jpg",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Undo Checkout",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/undocheckout/4fiKrpWsaN1ARGAut1jyKU",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"undocheckout",
-								"4fiKrpWsaN1ARGAut1jyKU"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": null,
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Not tested",
-			"item": [
-				{
-					"name": "Browse",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/browse?path&fromRoot&includeFolders&includeAssets&includeExtensions",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"browse"
-							],
-							"query": [
-								{
-									"key": "path",
-									"value": null,
-									"description": "assetPath"
-								},
-								{
-									"key": "fromRoot",
-									"value": null,
-									"description": "folderPath"
-								},
-								{
-									"key": "includeFolders",
-									"value": null,
-									"description": "true/false"
-								},
-								{
-									"key": "includeAssets",
-									"value": null,
-									"description": "true/false"
-								},
-								{
-									"key": "includeExtensions",
-									"value": null,
-									"description": "Comma-delimited list of extensions"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Auth Key",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/browse?subject&validUntil&assetIDs&description&downloadOriginal&downloadPreview&requestApproval&requestUpload&containerId&containerIds&importFolderPath&notifyEmail&sort&downloadPresetIds&watermarked",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"browse"
-							],
-							"query": [
-								{
-									"key": "subject",
-									"value": null,
-									"description": "Required - Subject for the AuthKey"
-								},
-								{
-									"key": "validUntil",
-									"value": null,
-									"description": "Required - Expiry Date (for Format see Date Patterns here: https://helpcenter.woodwing.com/hc/en-us/articles/360041854192"
-								},
-								{
-									"key": "assetIDs",
-									"value": null,
-									"description": "Comma delimited list of Asset IDs"
-								},
-								{
-									"key": "description",
-									"value": null,
-									"description": "Description for authKey"
-								},
-								{
-									"key": "downloadOriginal",
-									"value": null,
-									"description": "true/false - default false"
-								},
-								{
-									"key": "downloadPreview",
-									"value": null,
-									"description": "true/false - default false"
-								},
-								{
-									"key": "requestApproval",
-									"value": null,
-									"description": "true/false - default false"
-								},
-								{
-									"key": "requestUpload",
-									"value": null,
-									"description": "true/false - default false - must be true if assetIDs value is null"
-								},
-								{
-									"key": "containerId",
-									"value": null,
-									"description": "optional - relevant when requestUpload is true"
-								},
-								{
-									"key": "containerIds",
-									"value": null,
-									"description": "list, comma-separated, of containers for preview or download"
-								},
-								{
-									"key": "importFolderPath",
-									"value": null,
-									"description": "Required when 'requestUpload' is true. Optional otherwise. folderPath where files will be upload."
-								},
-								{
-									"key": "notifyEmail",
-									"value": null,
-									"description": "Email address to send notifications to when upload or approval is finished. Required when requestUpload or requestApproval is true. Optional otherwise."
-								},
-								{
-									"key": "sort",
-									"value": null,
-									"description": "Client setting. Optional"
-								},
-								{
-									"key": "downloadPresetIds",
-									"value": null,
-									"description": "Comma-delimited list of Download Preset IDs. Optional."
-								},
-								{
-									"key": "watermarked",
-									"value": null,
-									"description": "Shows watermarks on thumbnails and previews in Shared Links. Optional"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Folder",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/createFolder?path",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"createFolder"
-							],
-							"query": [
-								{
-									"key": "path",
-									"value": null,
-									"description": "The full folderPath of the folder to be created. Required. To create multiple folders repeat the 'path' parameter multiple times, each with a unique folder path"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "E-mail",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"to\" : \"info@somebody.com\",\n    \"subject\": \"Test email\",\n    \"body\" : \"Simple plain text body\",\n    \"htmlBody\" : \"<html><body><h1>HTML body</h1></body></html>\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"response": []
 						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/notifiy/email",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"notifiy",
-								"email"
-							]
+						{
+							"name": "Search",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/search?q=apollo",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"search"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "apollo",
+											"description": "Required. Query asking for Assets with the value of 'apollo'. Lots of ways to query. Start here for docs: https://helpcenter.woodwing.com/hc/en-us/articles/360041851432"
+										},
+										{
+											"key": "start",
+											"value": null,
+											"description": "Optional First hit to be returned. Starting at 0 for the first hit. Used for paging",
+											"disabled": true
+										},
+										{
+											"key": "num",
+											"value": null,
+											"description": "Optional. Number of hits to return. Default is 50. 0 returns no hits.",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": null,
+											"description": "Optional. The sort order of returned hits. Comma-delimited list of fields to sort on.\n",
+											"disabled": true
+										},
+										{
+											"key": "metadataToReturn",
+											"value": null,
+											"description": "Optional. For all fields use 'metadataToReturn=all', Leave null for only minimal fields. Default returns all fields. ",
+											"disabled": true
+										},
+										{
+											"key": "facets",
+											"value": null,
+											"description": "Optional. Comma-delimited list fiels to return facets for. Ex: facets=tags,assetDomain",
+											"disabled": true
+										},
+										{
+											"key": "facet.<field>.selection",
+											"value": null,
+											"description": "Optional. Replace <field> with the appropriate field you want. Ex: facet.assetDomain.selection=image,video\n",
+											"disabled": true
+										},
+										{
+											"key": "appendRequestSecret",
+											"value": null,
+											"description": "Optional. Default is false. Use when retrieving thumb, preview or original URL's and you won't need to authenticate against the server again.",
+											"disabled": true
+										},
+										{
+											"key": "returnHighlightedText",
+											"value": null,
+											"description": "Optional. Default is true. Any found text is highlighted.",
+											"disabled": true
+										},
+										{
+											"key": "returnThumbnailHits",
+											"value": null,
+											"description": "Optional. Default for 6.75 and higher is false, 6.74 and lower true.  Collections returned in the results have an additional array with up to 4 thumbnailHits",
+											"disabled": true
+										},
+										{
+											"key": "logSearch",
+											"value": null,
+											"description": "Optional. Default is true. When set to true, an entry for this search is written to the Stats index.",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Localization",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Working with Assets",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"description": "Use the X-CSRF-TOKEN value from your login",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "Filedata",
+											"value": "data:image/png;base64,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",
+											"type": "text"
+										},
+										{
+											"key": "filename",
+											"value": "Jeff",
+											"type": "text"
+										},
+										{
+											"key": "assetDomain",
+											"value": "image",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Here is a picture of the Grand Haven lighthouse",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/create",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"create"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/messages?localeChain&ifModifiedSince&bundle",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"messages"
-							],
-							"query": [
-								{
-									"key": "localeChain",
-									"value": null,
-									"description": "Comma separated list of locales. Default is us_EN."
-								},
-								{
-									"key": "ifModifiedSince",
-									"value": null,
-									"description": "Optional. The date of the last requested cached messages. Use this when caching the messages in your client locally. If omitted then the messages will always be returned.\n"
-								},
-								{
-									"key": "bundle",
-									"value": null,
-									"description": "Optional. Default is web. Options are 'web' or 'acm'"
+						{
+							"name": "Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/copy?source=&target=",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"copy"
+									],
+									"query": [
+										{
+											"key": "source",
+											"value": "",
+											"description": "The source image TO copy. This is the assetPath value"
+										},
+										{
+											"key": "target",
+											"value": "",
+											"description": "The destination path of the file plus the name"
+										}
+									]
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Log Usage Stats",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/logUsage?assetID&action",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"logUsage"
-							],
-							"query": [
-								{
-									"key": "* parameter to log",
-									"value": null,
-									"description": "value ",
-									"disabled": true
-								},
-								{
-									"key": "assetID",
-									"value": null
-								},
-								{
-									"key": "action",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Move / Rename",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/move?source=&target&folderReplacePolicy&fileReplacePolicy&filterQuery&flattenFolders&async",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"move"
-							],
-							"query": [
-								{
-									"key": "source",
-									"value": "",
-									"description": "Required. The folderPath or assetPath to asset to be moved or renamed "
-								},
-								{
-									"key": "target",
-									"value": null,
-									"description": "Required. The folderPath or assetPath to which the folder or asset should be moved or renamed. If the parent folder is the same as in the source path, the asset will be renamed, otherwise it will be moved.\n"
-								},
-								{
-									"key": "folderReplacePolicy",
-									"value": null,
-									"description": "Optional. Policy used when destination folder already exists. Options are: AUTO_RENAME, MERGE, THROW_EXCEPTION. if Omitted AUTO_RENAME will be be used."
-								},
-								{
-									"key": "fileReplacePolicy",
-									"value": null,
-									"description": "Optional. Policy used when destination asset already exists. Options: AUTO_RENAME, OVERWRITE, OVERWRITE_IF_NEWER, REMOVE_SOURCE, THROW_EXCEPTION, DO_NOTHING. if Omitted AUTO_RENAME will be be used."
-								},
-								{
-									"key": "filterQuery",
-									"value": null,
-									"description": "Optional. When specified, only source assets that match this query will be moved."
-								},
-								{
-									"key": "flattenFolders",
-									"value": null,
-									"description": "Optional. True/False. When set to true will move all files from source subfolders to directly below the target folder. This will 'flatten' any subfolder structure."
-								},
-								{
-									"key": "async",
-									"value": null,
-									"description": "Optional. True/False. When true, the process will run asynchronous in the background. The call will return immediate with the processId."
+						{
+							"name": "Checkout",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"description": "Get the token from the login values returned",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/checkout/4fiKrpWsaN1ARGAut1jyKU",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"checkout",
+										"4fiKrpWsaN1ARGAut1jyKU"
+									],
+									"query": [
+										{
+											"key": "assetPath",
+											"value": "/Demo Zone/Jeff/Blue Mosque Istanbul.jpg",
+											"disabled": true
+										}
+									]
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Profile",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/version/promote?assetID&version",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"version",
-								"promote"
-							],
-							"query": [
-								{
-									"key": "assetID",
-									"value": null,
-									"description": "Required. ID of the asset which needs to be reverted."
-								},
-								{
-									"key": "version",
-									"value": null,
-									"description": "Version number of the version to which the asset needs to be reverted."
+						{
+							"name": "Undo Checkout",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/undocheckout/4fiKrpWsaN1ARGAut1jyKU",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"undocheckout",
+										"4fiKrpWsaN1ARGAut1jyKU"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Remove",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/version/remove?q&ids&folderPath",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"version",
-								"remove"
-							],
-							"query": [
-								{
-									"key": "async",
-									"value": "",
-									"description": "Optional. When true, the process will run asynchronous in the background. The call will return immediate with the processId.",
-									"disabled": true
+						{
+							"name": "Move / Rename",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
-								{
-									"key": "q",
-									"value": null,
-									"description": "Required. A query that matches all assets to be removed. Be careful with this and make sure you test your query using a search call to prevent removing assets that you did not want to be removed."
-								},
-								{
-									"key": "ids",
-									"value": null
-								},
-								{
-									"key": "folderPath",
-									"value": null
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/move?source=&target&folderReplacePolicy&fileReplacePolicy&filterQuery&flattenFolders&async",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"move"
+									],
+									"query": [
+										{
+											"key": "source",
+											"value": "",
+											"description": "Required. The folderPath or assetPath to asset to be moved or renamed "
+										},
+										{
+											"key": "target",
+											"value": null,
+											"description": "Required. The folderPath or assetPath to which the folder or asset should be moved or renamed. If the parent folder is the same as in the source path, the asset will be renamed, otherwise it will be moved.\n"
+										},
+										{
+											"key": "folderReplacePolicy",
+											"value": null,
+											"description": "Optional. Policy used when destination folder already exists. Options are: AUTO_RENAME, MERGE, THROW_EXCEPTION. if Omitted AUTO_RENAME will be be used."
+										},
+										{
+											"key": "fileReplacePolicy",
+											"value": null,
+											"description": "Optional. Policy used when destination asset already exists. Options: AUTO_RENAME, OVERWRITE, OVERWRITE_IF_NEWER, REMOVE_SOURCE, THROW_EXCEPTION, DO_NOTHING. if Omitted AUTO_RENAME will be be used."
+										},
+										{
+											"key": "filterQuery",
+											"value": null,
+											"description": "Optional. When specified, only source assets that match this query will be moved."
+										},
+										{
+											"key": "flattenFolders",
+											"value": null,
+											"description": "Optional. True/False. When set to true will move all files from source subfolders to directly below the target folder. This will 'flatten' any subfolder structure."
+										},
+										{
+											"key": "async",
+											"value": null,
+											"description": "Optional. True/False. When true, the process will run asynchronous in the background. The call will return immediate with the processId."
+										}
+									]
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Remove Relation",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/version/removeRelation?relationIds",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"version",
-								"removeRelation"
-							],
-							"query": [
-								{
-									"key": "relationIds",
-									"value": null,
-									"description": "Required. Comma-delimited list of relation ids. A comma-delimited list of relation ids to be removed. To find the relation ids, use a relation search."
+						{
+							"name": "Remove",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/version/remove?q&ids&folderPath",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"version",
+										"remove"
+									],
+									"query": [
+										{
+											"key": "async",
+											"value": "",
+											"description": "Optional. When true, the process will run asynchronous in the background. The call will return immediate with the processId.",
+											"disabled": true
+										},
+										{
+											"key": "q",
+											"value": null,
+											"description": "Required. A query that matches all assets to be removed. Be careful with this and make sure you test your query using a search call to prevent removing assets that you did not want to be removed."
+										},
+										{
+											"key": "ids",
+											"value": null
+										},
+										{
+											"key": "folderPath",
+											"value": null
+										}
+									]
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Rendition Preset - List",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/renditionpreset/list",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"renditionpreset",
-								"list"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Rendition Preset - List All",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "Update bulk",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"description": "Use the X-CSRF-TOKEN value from your login",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/updatebulk?q&metadata&*&async&parseMetadataModifications",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"updatebulk"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": null,
+											"description": "A query matching the assets that should be updated, see the query syntax guide for details."
+										},
+										{
+											"key": "metadata",
+											"value": null,
+											"description": "Optional. A JSON encoded object with properties that match Assets Server metadata field names. This metadata will be set on the asset in Assets Server.\n\nOptional. You can also use parameters matching Assets Server field names."
+										},
+										{
+											"key": "*",
+											"value": null,
+											"description": "Any parameter matching an Assets Server metadata field name will be used as metadata. This metadata will be set on the asset in Assets Server."
+										},
+										{
+											"key": "async",
+											"value": null,
+											"description": "Optional. When true, the process will run asynchronous in the background. The call will return immediate with the processId."
+										},
+										{
+											"key": "parseMetadataModifications",
+											"value": null,
+											"description": "Optional. Default true. Prevents parsing \"+\" and \"-\" when set to false."
+										}
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/renditionpreset/listAll",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"renditionpreset",
-								"listAll"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Rendition Preset - Save/Update",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n        \"id\": \"\",\n        \"name\": \"Jeff Gapp API Preset\",\n        \"type\": \"IMAGE_PRESET\",\n        \"creator\": \"Sam Spade\",\n        \"sharedWithAuthKey\": false,\n        \"sharedWithGroups\": [\n            \"\"\n        ],\n        \"renditionSettings\": {\n            \"format\": \"jpg\",\n            \"scale\": 50.0,\n            \"maxWidth\": 100,\n            \"maxHeight\": 100,\n            \"maxLength\": -1,\n            \"ppi\": 72,\n            \"ppiEnabled\": true,\n            \"page\": -1,\n            \"embedMetadata\": true,\n            \"embedColorProfile\": true,\n            \"compression\": \"\",\n            \"quality\": 100,\n            \"resizeMode\": \"scale\",\n            \"watermarked\": false,\n            \"background\": \"\",\n            \"cropWidth\": -1,\n            \"cropHeight\": -1,\n            \"cropOffsetX\": -1,\n            \"cropOffsetY\": -1,\n            \"skipfront\": -1\n        }\n    }\n]",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "Update / check in",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"description": "Use the X-CSRF-TOKEN value from your login",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "id",
+											"value": "",
+											"description": "Required. The Assets Server id of the asset to be updated.\n",
+											"type": "text"
+										},
+										{
+											"key": "Filedata",
+											"value": "data:image/png;base64,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",
+											"description": "Optional. If not included only metadata is updated",
+											"type": "text"
+										},
+										{
+											"key": "metadata",
+											"value": "",
+											"description": "Optional. JSON Encoded object. You can also use parameters matching Assets Server field names.",
+											"type": "text"
+										},
+										{
+											"key": "metadataToReturn",
+											"value": "",
+											"description": "Comma-delimited list of metadata fields to return in hits. It is good practice to always specify just the metadata fields that you need.",
+											"type": "text"
+										},
+										{
+											"key": "nextUrl",
+											"value": "",
+											"description": "Optional. When specified, the service will send a 301 redirect to this URL when it completes successfully. If you place '${id}' in the URL, it will be replaced with the Assets Server asset id of the updated asset.",
+											"type": "text"
+										},
+										{
+											"key": "clearCheckoutState",
+											"value": "",
+											"description": "Optional. Default true. ",
+											"type": "text"
+										},
+										{
+											"key": "parseMetadataModifications",
+											"value": "",
+											"description": "Optional. Default true.",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/update",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"update"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/renditionpreset/save?id&name=jeff was here",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"renditionpreset",
-								"save"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": null
+						{
+							"name": "Versioning and History",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"description": "Use the X-CSRF-TOKEN value from your login",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
 								},
-								{
-									"key": "name",
-									"value": "jeff was here"
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/asset/history?id&start&num&detailLevel&actions",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"asset",
+										"history"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": null,
+											"description": "Required. assetID"
+										},
+										{
+											"key": "start",
+											"value": null,
+											"description": "Optional. First hit to be returned. Starting at 0 for the first hit. Used to skip hits to return 'paged' results. Default is 0."
+										},
+										{
+											"key": "num",
+											"value": null,
+											"description": "Number of hits to return."
+										},
+										{
+											"key": "detailLevel",
+											"value": null,
+											"description": "Optional. Default is 0. Can be customized."
+										},
+										{
+											"key": "actions",
+											"value": null,
+											"description": "Optional. Default is empty. Returns all actions."
+										}
+									]
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Rendition Preset - Remove",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/renditionpreset/remove?ids=",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"renditionpreset",
-								"remove"
-							],
-							"query": [
-								{
-									"key": "ids",
-									"value": "",
-									"description": "Required. ID of preset rendition"
+						{
+							"name": "Log Usage Stats",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/logUsage?assetID&action",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"logUsage"
+									],
+									"query": [
+										{
+											"key": "* parameter to log",
+											"value": null,
+											"description": "value ",
+											"disabled": true
+										},
+										{
+											"key": "assetID",
+											"value": null
+										},
+										{
+											"key": "action",
+											"value": null
+										}
+									]
 								}
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Revoke Auth Key",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Relations",
+					"item": [
+						{
+							"name": "Create Relation",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/?relationType&target1Id&target2Id",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										""
+									],
+									"query": [
+										{
+											"key": "relationType",
+											"value": null,
+											"description": "Values include: 'variation'"
+										},
+										{
+											"key": "target1Id",
+											"value": null
+										},
+										{
+											"key": "target2Id",
+											"value": null
+										}
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/revokeAuthKeys?keys=",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"revokeAuthKeys"
-							],
-							"query": [
-								{
-									"key": "keys",
-									"value": "",
-									"description": "Required. Comma-delimited list of authKeys."
+						{
+							"name": "Remove Relation",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/version/removeRelation?relationIds",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"version",
+										"removeRelation"
+									],
+									"query": [
+										{
+											"key": "relationIds",
+											"value": null,
+											"description": "Required. Comma-delimited list of relation ids. A comma-delimited list of relation ids to be removed. To find the relation ids, use a relation search."
+										}
+									]
 								}
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Update Auth Key",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/updateAuthKey?key&subject&validUntil&description&downloadOriginal&downloadPreview&requestApproval&requestUpload&containerId&containerIds&importFolderPath&notifyEmail&sort&viewMode&thumbnailFields&listviewFields&filmstripFields&thumbnailZoomLevel&listviewZoomLevel&filmstripZoomLevel&downloadPresetIds",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"updateAuthKey"
-							],
-							"query": [
-								{
-									"key": "key",
-									"value": null,
-									"description": "Required. The authKey which will be updated."
-								},
-								{
-									"key": "subject",
-									"value": null,
-									"description": "Optional. Subject for the AuthKey"
-								},
-								{
-									"key": "validUntil",
-									"value": null,
-									"description": "Optional. Expiry date, in one of the date formats supported by Assets Server, see the query syntax guide for details. "
-								},
-								{
-									"key": "description",
-									"value": null,
-									"description": "Optional. Description for authKey"
-								},
-								{
-									"key": "downloadOriginal",
-									"value": null,
-									"description": "Optional. true/false - default false"
-								},
-								{
-									"key": "downloadPreview",
-									"value": null,
-									"description": "Optional. true/false - default false"
-								},
-								{
-									"key": "requestApproval",
-									"value": null,
-									"description": "Optional. true/false - default false"
-								},
-								{
-									"key": "requestUpload",
-									"value": null,
-									"description": "Optional. true/false - default false - must be true if assetIDs value is null"
-								},
-								{
-									"key": "containerId",
-									"value": null,
-									"description": "Optional - relevant when requestUpload is true"
-								},
-								{
-									"key": "containerIds",
-									"value": null,
-									"description": "list, comma-separated, of containers for preview or download"
-								},
-								{
-									"key": "importFolderPath",
-									"value": null,
-									"description": "Required when 'requestUpload' is true. Optional otherwise. folderPath where files will be upload."
-								},
-								{
-									"key": "notifyEmail",
-									"value": null,
-									"description": "Optional. Email address to send notifications to when upload or approval is finished. Required when requestUpload or requestApproval is true. Optional otherwise."
-								},
-								{
-									"key": "sort",
-									"value": null,
-									"description": "Optional. Client setting."
-								},
-								{
-									"key": "viewMode",
-									"value": null,
-									"description": "Optional. thumbnail, list, mason are values. Default is thumbnail"
-								},
-								{
-									"key": "thumbnailFields",
-									"value": null,
-									"description": "Optional. Client setting, comma-delimited list of fieldnames for showing metadata in the thumbnail view."
-								},
-								{
-									"key": "listviewFields",
-									"value": null,
-									"description": "Optional. Client setting, comma-delimited list of fieldnames for showing metadata in the list view."
-								},
-								{
-									"key": "filmstripFields",
-									"value": null,
-									"description": "Optional. Client setting, comma-delimited list of fieldnames for showing metadata in the filmstrip view."
-								},
-								{
-									"key": "thumbnailZoomLevel",
-									"value": null,
-									"description": "Optional. Client setting, thumbnail zoom level in the thumbnail view."
-								},
-								{
-									"key": "listviewZoomLevel",
-									"value": null,
-									"description": "Optional. Client setting, thumbnail zoom level in the list view."
-								},
-								{
-									"key": "filmstripZoomLevel",
-									"value": null,
-									"description": "Optional. Client setting, thumbnail zoom level in the filmstrip view."
-								},
-								{
-									"key": "downloadPresetIds",
-									"value": null,
-									"description": "Optional. Comma-delimited list of Download Preset id's. Allows the downloading of renditions generated according to these Preset settings."
+					"name": "Auth Keys (Sharelinks)",
+					"item": [
+						{
+							"name": "Create Auth Key",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/browse?subject&validUntil&assetIDs&description&downloadOriginal&downloadPreview&requestApproval&requestUpload&containerId&containerIds&importFolderPath&notifyEmail&sort&downloadPresetIds&watermarked",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"browse"
+									],
+									"query": [
+										{
+											"key": "subject",
+											"value": null,
+											"description": "Required - Subject for the AuthKey"
+										},
+										{
+											"key": "validUntil",
+											"value": null,
+											"description": "Required - Expiry Date (for Format see Date Patterns here: https://helpcenter.woodwing.com/hc/en-us/articles/360041854192"
+										},
+										{
+											"key": "assetIDs",
+											"value": null,
+											"description": "Comma delimited list of Asset IDs"
+										},
+										{
+											"key": "description",
+											"value": null,
+											"description": "Description for authKey"
+										},
+										{
+											"key": "downloadOriginal",
+											"value": null,
+											"description": "true/false - default false"
+										},
+										{
+											"key": "downloadPreview",
+											"value": null,
+											"description": "true/false - default false"
+										},
+										{
+											"key": "requestApproval",
+											"value": null,
+											"description": "true/false - default false"
+										},
+										{
+											"key": "requestUpload",
+											"value": null,
+											"description": "true/false - default false - must be true if assetIDs value is null"
+										},
+										{
+											"key": "containerId",
+											"value": null,
+											"description": "optional - relevant when requestUpload is true"
+										},
+										{
+											"key": "containerIds",
+											"value": null,
+											"description": "list, comma-separated, of containers for preview or download"
+										},
+										{
+											"key": "importFolderPath",
+											"value": null,
+											"description": "Required when 'requestUpload' is true. Optional otherwise. folderPath where files will be upload."
+										},
+										{
+											"key": "notifyEmail",
+											"value": null,
+											"description": "Email address to send notifications to when upload or approval is finished. Required when requestUpload or requestApproval is true. Optional otherwise."
+										},
+										{
+											"key": "sort",
+											"value": null,
+											"description": "Client setting. Optional"
+										},
+										{
+											"key": "downloadPresetIds",
+											"value": null,
+											"description": "Comma-delimited list of Download Preset IDs. Optional."
+										},
+										{
+											"key": "watermarked",
+											"value": null,
+											"description": "Shows watermarks on thumbnails and previews in Shared Links. Optional"
+										}
+									]
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update bulk",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"description": "Use the X-CSRF-TOKEN value from your login",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/updatebulk?q&metadata&*&async&parseMetadataModifications",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"updatebulk"
-							],
-							"query": [
-								{
-									"key": "q",
-									"value": null,
-									"description": "A query matching the assets that should be updated, see the query syntax guide for details."
-								},
-								{
-									"key": "metadata",
-									"value": null,
-									"description": "Optional. A JSON encoded object with properties that match Assets Server metadata field names. This metadata will be set on the asset in Assets Server.\n\nOptional. You can also use parameters matching Assets Server field names."
-								},
-								{
-									"key": "*",
-									"value": null,
-									"description": "Any parameter matching an Assets Server metadata field name will be used as metadata. This metadata will be set on the asset in Assets Server."
-								},
-								{
-									"key": "async",
-									"value": null,
-									"description": "Optional. When true, the process will run asynchronous in the background. The call will return immediate with the processId."
-								},
-								{
-									"key": "parseMetadataModifications",
-									"value": null,
-									"description": "Optional. Default true. Prevents parsing \"+\" and \"-\" when set to false."
+						{
+							"name": "Update Auth Key",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/updateAuthKey?key&subject&validUntil&description&downloadOriginal&downloadPreview&requestApproval&requestUpload&containerId&containerIds&importFolderPath&notifyEmail&sort&viewMode&thumbnailFields&listviewFields&filmstripFields&thumbnailZoomLevel&listviewZoomLevel&filmstripZoomLevel&downloadPresetIds",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"updateAuthKey"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": null,
+											"description": "Required. The authKey which will be updated."
+										},
+										{
+											"key": "subject",
+											"value": null,
+											"description": "Optional. Subject for the AuthKey"
+										},
+										{
+											"key": "validUntil",
+											"value": null,
+											"description": "Optional. Expiry date, in one of the date formats supported by Assets Server, see the query syntax guide for details. "
+										},
+										{
+											"key": "description",
+											"value": null,
+											"description": "Optional. Description for authKey"
+										},
+										{
+											"key": "downloadOriginal",
+											"value": null,
+											"description": "Optional. true/false - default false"
+										},
+										{
+											"key": "downloadPreview",
+											"value": null,
+											"description": "Optional. true/false - default false"
+										},
+										{
+											"key": "requestApproval",
+											"value": null,
+											"description": "Optional. true/false - default false"
+										},
+										{
+											"key": "requestUpload",
+											"value": null,
+											"description": "Optional. true/false - default false - must be true if assetIDs value is null"
+										},
+										{
+											"key": "containerId",
+											"value": null,
+											"description": "Optional - relevant when requestUpload is true"
+										},
+										{
+											"key": "containerIds",
+											"value": null,
+											"description": "list, comma-separated, of containers for preview or download"
+										},
+										{
+											"key": "importFolderPath",
+											"value": null,
+											"description": "Required when 'requestUpload' is true. Optional otherwise. folderPath where files will be upload."
+										},
+										{
+											"key": "notifyEmail",
+											"value": null,
+											"description": "Optional. Email address to send notifications to when upload or approval is finished. Required when requestUpload or requestApproval is true. Optional otherwise."
+										},
+										{
+											"key": "sort",
+											"value": null,
+											"description": "Optional. Client setting."
+										},
+										{
+											"key": "viewMode",
+											"value": null,
+											"description": "Optional. thumbnail, list, mason are values. Default is thumbnail"
+										},
+										{
+											"key": "thumbnailFields",
+											"value": null,
+											"description": "Optional. Client setting, comma-delimited list of fieldnames for showing metadata in the thumbnail view."
+										},
+										{
+											"key": "listviewFields",
+											"value": null,
+											"description": "Optional. Client setting, comma-delimited list of fieldnames for showing metadata in the list view."
+										},
+										{
+											"key": "filmstripFields",
+											"value": null,
+											"description": "Optional. Client setting, comma-delimited list of fieldnames for showing metadata in the filmstrip view."
+										},
+										{
+											"key": "thumbnailZoomLevel",
+											"value": null,
+											"description": "Optional. Client setting, thumbnail zoom level in the thumbnail view."
+										},
+										{
+											"key": "listviewZoomLevel",
+											"value": null,
+											"description": "Optional. Client setting, thumbnail zoom level in the list view."
+										},
+										{
+											"key": "filmstripZoomLevel",
+											"value": null,
+											"description": "Optional. Client setting, thumbnail zoom level in the filmstrip view."
+										},
+										{
+											"key": "downloadPresetIds",
+											"value": null,
+											"description": "Optional. Comma-delimited list of Download Preset id's. Allows the downloading of renditions generated according to these Preset settings."
+										}
+									]
 								}
-							]
+							},
+							"response": []
+						},
+						{
+							"name": "Revoke Auth Key",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/revokeAuthKeys?keys=",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"revokeAuthKeys"
+									],
+									"query": [
+										{
+											"key": "keys",
+											"value": "",
+											"description": "Required. Comma-delimited list of authKeys."
+										}
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Update / check in",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"description": "Use the X-CSRF-TOKEN value from your login",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "id",
-									"value": "",
-									"description": "Required. The Assets Server id of the asset to be updated.\n",
-									"type": "text"
-								},
-								{
-									"key": "Filedata",
-									"value": "data:image/png;base64,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",
-									"description": "Optional. If not included only metadata is updated",
-									"type": "text"
-								},
-								{
-									"key": "metadata",
-									"value": "",
-									"description": "Optional. JSON Encoded object. You can also use parameters matching Assets Server field names.",
-									"type": "text"
-								},
-								{
-									"key": "metadataToReturn",
-									"value": "",
-									"description": "Comma-delimited list of metadata fields to return in hits. It is good practice to always specify just the metadata fields that you need.",
-									"type": "text"
-								},
-								{
-									"key": "nextUrl",
-									"value": "",
-									"description": "Optional. When specified, the service will send a 301 redirect to this URL when it completes successfully. If you place '${id}' in the URL, it will be replaced with the Assets Server asset id of the updated asset.",
-									"type": "text"
-								},
-								{
-									"key": "clearCheckoutState",
-									"value": "",
-									"description": "Optional. Default true. ",
-									"type": "text"
-								},
-								{
-									"key": "parseMetadataModifications",
-									"value": "",
-									"description": "Optional. Default true.",
-									"type": "text"
+					"name": "Folders",
+					"item": [
+						{
+							"name": "Create Folder",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/createFolder?path",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"createFolder"
+									],
+									"query": [
+										{
+											"key": "path",
+											"value": null,
+											"description": "The full folderPath of the folder to be created. Required. To create multiple folders repeat the 'path' parameter multiple times, each with a unique folder path"
+										}
+									]
 								}
-							]
-						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/update",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"update"
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Versioning and History",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"description": "Use the X-CSRF-TOKEN value from your login",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/asset/history?id&start&num&detailLevel&actions",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"asset",
-								"history"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": null,
-									"description": "Required. assetID"
+					"name": "Renditions",
+					"item": [
+						{
+							"name": "Rendition Preset - List",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
-								{
-									"key": "start",
-									"value": null,
-									"description": "Optional. First hit to be returned. Starting at 0 for the first hit. Used to skip hits to return 'paged' results. Default is 0."
-								},
-								{
-									"key": "num",
-									"value": null,
-									"description": "Number of hits to return."
-								},
-								{
-									"key": "detailLevel",
-									"value": null,
-									"description": "Optional. Default is 0. Can be customized."
-								},
-								{
-									"key": "actions",
-									"value": null,
-									"description": "Optional. Default is empty. Returns all actions."
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/renditionpreset/list",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"renditionpreset",
+										"list"
+									]
 								}
-							]
+							},
+							"response": []
+						},
+						{
+							"name": "Rendition Preset - List All",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/renditionpreset/listAll",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"renditionpreset",
+										"listAll"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rendition Preset - Save/Update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"id\": \"\",\n        \"name\": \"Jeff Gapp API Preset\",\n        \"type\": \"IMAGE_PRESET\",\n        \"creator\": \"Sam Spade\",\n        \"sharedWithAuthKey\": false,\n        \"sharedWithGroups\": [\n            \"\"\n        ],\n        \"renditionSettings\": {\n            \"format\": \"jpg\",\n            \"scale\": 50.0,\n            \"maxWidth\": 100,\n            \"maxHeight\": 100,\n            \"maxLength\": -1,\n            \"ppi\": 72,\n            \"ppiEnabled\": true,\n            \"page\": -1,\n            \"embedMetadata\": true,\n            \"embedColorProfile\": true,\n            \"compression\": \"\",\n            \"quality\": 100,\n            \"resizeMode\": \"scale\",\n            \"watermarked\": false,\n            \"background\": \"\",\n            \"cropWidth\": -1,\n            \"cropHeight\": -1,\n            \"cropOffsetX\": -1,\n            \"cropOffsetY\": -1,\n            \"skipfront\": -1\n        }\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/renditionpreset/save?id&name=jeff was here",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"renditionpreset",
+										"save"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": null
+										},
+										{
+											"key": "name",
+											"value": "jeff was here"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rendition Preset - Remove",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/renditionpreset/remove?ids=",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"renditionpreset",
+										"remove"
+									],
+									"query": [
+										{
+											"key": "ids",
+											"value": "",
+											"description": "Required. ID of preset rendition"
+										}
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
+				},
+				{
+					"name": "Misc",
+					"item": [
+						{
+							"name": "E-mail",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"to\" : \"info@somebody.com\",\n    \"subject\": \"Test email\",\n    \"body\" : \"Simple plain text body\",\n    \"htmlBody\" : \"<html><body><h1>HTML body</h1></body></html>\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/notifiy/email",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"notifiy",
+										"email"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Localization",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/messages?localeChain&ifModifiedSince&bundle",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"messages"
+									],
+									"query": [
+										{
+											"key": "localeChain",
+											"value": null,
+											"description": "Comma separated list of locales. Default is us_EN."
+										},
+										{
+											"key": "ifModifiedSince",
+											"value": null,
+											"description": "Optional. The date of the last requested cached messages. Use this when caching the messages in your client locally. If omitted then the messages will always be returned.\n"
+										},
+										{
+											"key": "bundle",
+											"value": null,
+											"description": "Optional. Default is web. Options are 'web' or 'acm'"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Profile",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/version/promote?assetID&version",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"version",
+										"promote"
+									],
+									"query": [
+										{
+											"key": "assetID",
+											"value": null,
+											"description": "Required. ID of the asset which needs to be reverted."
+										},
+										{
+											"key": "version",
+											"value": null,
+											"description": "Version number of the version to which the asset needs to be reverted."
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
@@ -1600,105 +1625,915 @@
 			"name": "REST API - Management Console",
 			"item": [
 				{
-					"name": "Create Asset - API",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"assetPath\": \"/Demo Files/Jeff/Upload.jpg\",\n  \"autoRename\": true,\n  \"metadata\": {\n      \"filename\":\"jg test file\"\n  },\n  \"metadataToReturn\": [\n    \"filename\"\n  ]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "asset",
+					"item": [
+						{
+							"name": "Create Asset - API",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"assetPath\": \"/Demo Files/Jeff/Upload.jpg\",\n  \"autoRename\": true,\n  \"metadata\": {\n      \"filename\":\"jg test file\"\n  },\n  \"metadataToReturn\": [\n    \"filename\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/asset",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"asset"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/api/asset",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"api",
-								"asset"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": null,
-									"disabled": true
+						{
+							"name": "Create Asset - API Upload",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "Filedata",
+											"type": "file",
+											"src": "/Users/jgapp/Pictures/GrandHaven.jpg"
+										},
+										{
+											"key": "requestSecret",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "createVersion",
+											"value": "true",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/asset/FPQS2NqxK4xA7D4viFX1z7/original?requestSecret=eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eJxtVNtymzAQ_Rc9u3HsJCXxTKejwMYoBokgkUs7HYbYckqHgAM4l2by710ZG9ukT6Czqz1nL9p3kizr32xGRuT0smRf5p4z-bOgj5k_zbTFeEJ6K4-iTOtUV2T0k4TCg1i6NIQ4CjxBHXRZYQ54oGBzorZigseBF40Zlxs0khCquwDioCw2WOAKJaQrgtj2GHC1wX3K6RjNEPpMSgwmP1tkAMhzDVuTOGeGPehGs12wJyJqz8w3ITASCyKPGq3d6PvK16iEfSmOuOG7RWgKg_ShuG5rIRVVuyVwYtayKXoruPDvWp2RVMKPx6BUi0ngTgw-Zd5WfSBCtVvV-IfgLaEtuMLcV8SmC_ulYNwBycZduJEeIhdrWheChK3utTAasFhSP_DgUw1i2kIh2Jh_uD2OgUNIFebrRv4530nFoYrG1PFZtwGNOpPLBRt3VEg3Ugrbr4Q92dPf8bNDoGY-YsCkRKsHpe11ce3tg6IrOVg3P9jKX5tvQjaB7jwYUif2GJ90o63mukN8A-fduWycI2mihbDbVlt4HqyekSS_emSapTqv1dtC42vFNqBbqZ_sqpyT0TzJKm3Oj0Wt6WxWoot1dDA4PRgeHeLHIhujW1T1f4xJYd62TB9yPYvK7PKlNpTLSpeOrpM0w6f_bjbBdgNEWCAzeLtDaO7ox4SM8mWW4fUcf8lLUcxe0vzBsOSovS6XKFUbW_Nbvy3QrdkI063HfJl3b2eN7aNH0goVEcie0wot1fJ-3zVNUOngqzUYHh6eDYY9kt_PW8A6Q0C_LtbA4ORoeIJiyxRj9JNF2k-qStf9i-BKDvnT6-T4lVrO8XN6cTv4a_VxFT6keZJ9n5Y6qfW1Lqu0yL-tOkA-_gGWQY5c.FbgAlrIr9PUFY3TN-tfWfaoj4L68xie3qZKV_TECt2DphS5Yv666cujJqvKqicUxs3WKyfaUvxJJFJl1DWtkSA&createVersion=true",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"asset",
+										"FPQS2NqxK4xA7D4viFX1z7",
+										"original"
+									],
+									"query": [
+										{
+											"key": "requestSecret",
+											"value": "eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eJxtVNtymzAQ_Rc9u3HsJCXxTKejwMYoBokgkUs7HYbYckqHgAM4l2by710ZG9ukT6Czqz1nL9p3kizr32xGRuT0smRf5p4z-bOgj5k_zbTFeEJ6K4-iTOtUV2T0k4TCg1i6NIQ4CjxBHXRZYQ54oGBzorZigseBF40Zlxs0khCquwDioCw2WOAKJaQrgtj2GHC1wX3K6RjNEPpMSgwmP1tkAMhzDVuTOGeGPehGs12wJyJqz8w3ITASCyKPGq3d6PvK16iEfSmOuOG7RWgKg_ShuG5rIRVVuyVwYtayKXoruPDvWp2RVMKPx6BUi0ngTgw-Zd5WfSBCtVvV-IfgLaEtuMLcV8SmC_ulYNwBycZduJEeIhdrWheChK3utTAasFhSP_DgUw1i2kIh2Jh_uD2OgUNIFebrRv4530nFoYrG1PFZtwGNOpPLBRt3VEg3Ugrbr4Q92dPf8bNDoGY-YsCkRKsHpe11ce3tg6IrOVg3P9jKX5tvQjaB7jwYUif2GJ90o63mukN8A-fduWycI2mihbDbVlt4HqyekSS_emSapTqv1dtC42vFNqBbqZ_sqpyT0TzJKm3Oj0Wt6WxWoot1dDA4PRgeHeLHIhujW1T1f4xJYd62TB9yPYvK7PKlNpTLSpeOrpM0w6f_bjbBdgNEWCAzeLtDaO7ox4SM8mWW4fUcf8lLUcxe0vzBsOSovS6XKFUbW_Nbvy3QrdkI063HfJl3b2eN7aNH0goVEcie0wot1fJ-3zVNUOngqzUYHh6eDYY9kt_PW8A6Q0C_LtbA4ORoeIJiyxRj9JNF2k-qStf9i-BKDvnT6-T4lVrO8XN6cTv4a_VxFT6keZJ9n5Y6qfW1Lqu0yL-tOkA-_gGWQY5c.FbgAlrIr9PUFY3TN-tfWfaoj4L68xie3qZKV_TECt2DphS5Yv666cujJqvKqicUxs3WKyfaUvxJJFJl1DWtkSA"
+										},
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "createVersion",
+											"value": "true"
+										}
+									]
 								}
-							]
+							},
+							"response": []
+						},
+						{
+							"name": "Search",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/asset/search?q=apollo&from&size",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"asset",
+										"search"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "apollo",
+											"description": "The search query."
+										},
+										{
+											"key": "from",
+											"value": null,
+											"description": "The offset from the first result you want to fetch. Default is 0."
+										},
+										{
+											"key": "size",
+											"value": null,
+											"description": "The maximum amount of hits to be returned. Default is 10."
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Signed Image Rendition URL",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/asset/{{ids}}/signed-image-rendition-url?validFor=600&format=jpg",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"asset",
+										"{{ids}}",
+										"signed-image-rendition-url"
+									],
+									"query": [
+										{
+											"key": "validFor",
+											"value": "600",
+											"description": "Number of minutes the URL is valid for. -1 provides a URL that doesn't expire."
+										},
+										{
+											"key": "format",
+											"value": "jpg",
+											"description": "Required. Values are jpg, png, tiff"
+										},
+										{
+											"key": "scale",
+											"value": null,
+											"description": "Scales the width and height of the rendition relative to the original size. The scale is in percentages from 1 to 100. If used in combination with maxWidth or maxHeight the image will be scaled with a maximum size.",
+											"disabled": true
+										},
+										{
+											"key": "maxWidth",
+											"value": null,
+											"description": "Sets the maximum width of the preview. The aspect ratio will always remain the same. If the original asset fits within the supplied dimensions, the original width and height will be used for generating the rendition.",
+											"disabled": true
+										},
+										{
+											"key": "maxHeight",
+											"value": null,
+											"description": "Sets the maximum height of the preview. The aspect ratio will always remain the same. If the original asset fits within the supplied dimensions, the original width and height will be used for generating the rendition.",
+											"disabled": true
+										},
+										{
+											"key": "ppi",
+											"value": null,
+											"description": "The pixels per inch / dots per inch can be set to any desired value. When not set, the original PPI / DPI value of the asset will be used.",
+											"disabled": true
+										},
+										{
+											"key": "embedMetadata",
+											"value": null,
+											"description": "When set to true, the metadata embedded in the original asset will be embedded in the generated rendition. Note that for certain file types the embedding of metadata is not supported, for example for PNG files. By default the original metadata is not embedded.",
+											"disabled": true
+										},
+										{
+											"key": "embedColorProfile",
+											"value": null,
+											"description": "When set to true, the color profile that is used to generate the rendition is included.",
+											"disabled": true
+										},
+										{
+											"key": "compression",
+											"value": null,
+											"description": "TIFF Compression type, applicable when format=’tif’. Allowed values: uncompressed, packBits, LZW, ZIP and JPEG.",
+											"disabled": true
+										},
+										{
+											"key": "quality",
+											"value": null,
+											"description": "JPEG compression, applicable when format=’jpg’. The quality is defined a value from 1 to 100.",
+											"disabled": true
+										},
+										{
+											"key": "watermarked",
+											"value": null,
+											"description": "When set to true, a watermark is applied to the rendition. Note: a watermark needs to be configured in the server configuration.",
+											"disabled": true
+										},
+										{
+											"key": "background",
+											"value": null,
+											"description": "Sets the background color (hex color code) for transparent images. If not specified, the output of PNG and TIFF images will be transparent.",
+											"disabled": true
+										},
+										{
+											"key": "cropWidth",
+											"value": null,
+											"description": "Sets the width (in pixels) to which the image should be cropped.",
+											"disabled": true
+										},
+										{
+											"key": "cropHeight",
+											"value": null,
+											"description": "Sets the height (in pixels) to which the image should be cropped.",
+											"disabled": true
+										},
+										{
+											"key": "cropOffsetX",
+											"value": null,
+											"description": "Sets the crop x offset in pixels (from the top left corner).",
+											"disabled": true
+										},
+										{
+											"key": "cropOffsetY",
+											"value": null,
+											"description": "Sets the crop y offset in pixels (from the top left corner).",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Signed Original URL",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/asset/{{ids}}/signed-original-url?validFor=600",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"asset",
+										"{{ids}}",
+										"signed-original-url"
+									],
+									"query": [
+										{
+											"key": "validFor",
+											"value": "600",
+											"description": "Number of minutes the URL is valid for. -1 provides a URL that doesn't expire."
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Signed Preview URL",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/asset/{{ids}}/signed-preview-url?validFor=600",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"asset",
+										"{{ids}}",
+										"signed-preview-url"
+									],
+									"query": [
+										{
+											"key": "validFor",
+											"value": "600",
+											"description": "Number of minutes the URL is valid for. -1 provides a URL that doesn't expire."
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Signed Thumbnail URL",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/asset/{{ids}}/signed-thumbnail-url?validFor=600",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"asset",
+										"{{ids}}",
+										"signed-thumbnail-url"
+									],
+									"query": [
+										{
+											"key": "validFor",
+											"value": "600",
+											"description": "Number of minutes the URL is valid for. -1 provides a URL that doesn't expire."
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Specific Asset",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/asset/{{id}}",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"asset",
+										"{{id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Download Asset Original",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/asset/{{id}}/original",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"asset",
+										"{{id}}",
+										"original"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Upload Asset (Multi-Part form data)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "createVersion",
+											"value": "",
+											"description": "Default is true",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/asset/{{id}}/original",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"asset",
+										"{{id}}",
+										"original"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Upload Asset (Multi-Part form data) Copy",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "createVersion",
+											"value": "",
+											"description": "Default is true",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/asset/{{id}}/original",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"asset",
+										"{{id}}",
+										"original"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Download Asset Preview",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/asset/{{id}}/original",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"asset",
+										"{{id}}",
+										"original"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Download Asset Thumbnail",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/asset/{{id}}/thumbnail",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"asset",
+										"{{id}}",
+										"thumbnail"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Create Asset - API Upload",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "Filedata",
-									"type": "file",
-									"src": "/Users/jgapp/Pictures/GrandHaven.jpg"
+					"name": "Create Sharelink",
+					"item": [
+						{
+							"name": "Create Sharelink",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"sharedAssetIds\": [\n        \"string\"\n    ],\n    \"sharedContainerId\": \"string\",\n    \"uploadFolderPath\": \"string\",\n    \"subject\": \"string\",\n    \"description\": \"string\",\n    \"validUntil\": \"2018-01-01T13:37:00Z\",\n    \"query\": \"string\",\n    \"requestUpload\": false,\n    \"requestApproval\": false,\n    \"notifyEmail\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
-								{
-									"key": "requestSecret",
-									"value": "",
-									"type": "text"
-								},
-								{
-									"key": "createVersion",
-									"value": "true",
-									"type": "text"
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/sharelink",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"sharelink"
+									]
 								}
-							]
-						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/api/asset/FPQS2NqxK4xA7D4viFX1z7/original?requestSecret=eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eJxtVNtymzAQ_Rc9u3HsJCXxTKejwMYoBokgkUs7HYbYckqHgAM4l2by710ZG9ukT6Czqz1nL9p3kizr32xGRuT0smRf5p4z-bOgj5k_zbTFeEJ6K4-iTOtUV2T0k4TCg1i6NIQ4CjxBHXRZYQ54oGBzorZigseBF40Zlxs0khCquwDioCw2WOAKJaQrgtj2GHC1wX3K6RjNEPpMSgwmP1tkAMhzDVuTOGeGPehGs12wJyJqz8w3ITASCyKPGq3d6PvK16iEfSmOuOG7RWgKg_ShuG5rIRVVuyVwYtayKXoruPDvWp2RVMKPx6BUi0ngTgw-Zd5WfSBCtVvV-IfgLaEtuMLcV8SmC_ulYNwBycZduJEeIhdrWheChK3utTAasFhSP_DgUw1i2kIh2Jh_uD2OgUNIFebrRv4530nFoYrG1PFZtwGNOpPLBRt3VEg3Ugrbr4Q92dPf8bNDoGY-YsCkRKsHpe11ce3tg6IrOVg3P9jKX5tvQjaB7jwYUif2GJ90o63mukN8A-fduWycI2mihbDbVlt4HqyekSS_emSapTqv1dtC42vFNqBbqZ_sqpyT0TzJKm3Oj0Wt6WxWoot1dDA4PRgeHeLHIhujW1T1f4xJYd62TB9yPYvK7PKlNpTLSpeOrpM0w6f_bjbBdgNEWCAzeLtDaO7ox4SM8mWW4fUcf8lLUcxe0vzBsOSovS6XKFUbW_Nbvy3QrdkI063HfJl3b2eN7aNH0goVEcie0wot1fJ-3zVNUOngqzUYHh6eDYY9kt_PW8A6Q0C_LtbA4ORoeIJiyxRj9JNF2k-qStf9i-BKDvnT6-T4lVrO8XN6cTv4a_VxFT6keZJ9n5Y6qfW1Lqu0yL-tOkA-_gGWQY5c.FbgAlrIr9PUFY3TN-tfWfaoj4L68xie3qZKV_TECt2DphS5Yv666cujJqvKqicUxs3WKyfaUvxJJFJl1DWtkSA&createVersion=true",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"api",
-								"asset",
-								"FPQS2NqxK4xA7D4viFX1z7",
-								"original"
-							],
-							"query": [
-								{
-									"key": "requestSecret",
-									"value": "eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eJxtVNtymzAQ_Rc9u3HsJCXxTKejwMYoBokgkUs7HYbYckqHgAM4l2by710ZG9ukT6Czqz1nL9p3kizr32xGRuT0smRf5p4z-bOgj5k_zbTFeEJ6K4-iTOtUV2T0k4TCg1i6NIQ4CjxBHXRZYQ54oGBzorZigseBF40Zlxs0khCquwDioCw2WOAKJaQrgtj2GHC1wX3K6RjNEPpMSgwmP1tkAMhzDVuTOGeGPehGs12wJyJqz8w3ITASCyKPGq3d6PvK16iEfSmOuOG7RWgKg_ShuG5rIRVVuyVwYtayKXoruPDvWp2RVMKPx6BUi0ngTgw-Zd5WfSBCtVvV-IfgLaEtuMLcV8SmC_ulYNwBycZduJEeIhdrWheChK3utTAasFhSP_DgUw1i2kIh2Jh_uD2OgUNIFebrRv4530nFoYrG1PFZtwGNOpPLBRt3VEg3Ugrbr4Q92dPf8bNDoGY-YsCkRKsHpe11ce3tg6IrOVg3P9jKX5tvQjaB7jwYUif2GJ90o63mukN8A-fduWycI2mihbDbVlt4HqyekSS_emSapTqv1dtC42vFNqBbqZ_sqpyT0TzJKm3Oj0Wt6WxWoot1dDA4PRgeHeLHIhujW1T1f4xJYd62TB9yPYvK7PKlNpTLSpeOrpM0w6f_bjbBdgNEWCAzeLtDaO7ox4SM8mWW4fUcf8lLUcxe0vzBsOSovS6XKFUbW_Nbvy3QrdkI063HfJl3b2eN7aNH0goVEcie0wot1fJ-3zVNUOngqzUYHh6eDYY9kt_PW8A6Q0C_LtbA4ORoeIJiyxRj9JNF2k-qStf9i-BKDvnT6-T4lVrO8XN6cTv4a_VxFT6keZJ9n5Y6qfW1Lqu0yL-tOkA-_gGWQY5c.FbgAlrIr9PUFY3TN-tfWfaoj4L68xie3qZKV_TECt2DphS5Yv666cujJqvKqicUxs3WKyfaUvxJJFJl1DWtkSA"
-								},
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "createVersion",
-									"value": "true"
-								}
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
+				},
+				{
+					"name": "Folder",
+					"item": [
+						{
+							"name": "Create Folder",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"path\": \"/Demo Zone/Postman\",\n  \"metadata\": {\n      \"tags\":\"test,folder\"\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/folder",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"folder"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Folder by path",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/folder/get?path=/Demo Zone/Postman",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"folder",
+										"get"
+									],
+									"query": [
+										{
+											"key": "path",
+											"value": "/Demo Zone/Postman",
+											"description": "Path to the folder you want"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List folders",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/folder/list?id={{folder_id}}&from&size&metadataToReturn=tags",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"folder",
+										"list"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "{{folder_id}}",
+											"description": "Folder identifier (generally top level)"
+										},
+										{
+											"key": "from",
+											"value": null,
+											"description": "The offset from the first result you want to fetch. Default value : 0"
+										},
+										{
+											"key": "size",
+											"value": null,
+											"description": "The maximum amount of hits to be returned. Default value : 10"
+										},
+										{
+											"key": "metadataToReturn",
+											"value": "tags",
+											"description": "Metadata fields to return for folders. Specify ‘all’ to return all available metadata. Specify ‘none’ to return no metadata.\n\nDefault value : all"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Folder Search",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/folder/search?q=name:postman&from&size&metadataToReturn=tags",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"folder",
+										"search"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "name:postman",
+											"description": "Folder identifier (generally top level)"
+										},
+										{
+											"key": "from",
+											"value": null,
+											"description": "The offset from the first result you want to fetch. Default value : 0"
+										},
+										{
+											"key": "size",
+											"value": null,
+											"description": "The maximum amount of hits to be returned. Default value : 10"
+										},
+										{
+											"key": "metadataToReturn",
+											"value": "tags",
+											"description": "Metadata fields to return for folders. Specify ‘all’ to return all available metadata. Specify ‘none’ to return no metadata.\n\nDefault value : all"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Folder by id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/folder/{{folder_id}}",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"folder",
+										"{{folder_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Folder Metadata",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"metadata\": {\n      \"tags\":\"updated\"\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/folder/{{folder_id}}",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"folder",
+										"{{folder_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Folder",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"metadata\": {\n      \"tags\":\"updated\"\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/api/folder/{{folder_id}}",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"api",
+										"folder",
+										"{{folder_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
