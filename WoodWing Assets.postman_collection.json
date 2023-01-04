@@ -10,132 +10,158 @@
 			"name": "Login and Logout",
 			"item": [
 				{
-					"name": "Login using 'apilogin'",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"username\":\"api.user\",\n    \"password\":\"T24b~+xhNx+7-5j\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/apilogin?username={{api_user_name}}&password={{api_password}}",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"apilogin"
-							],
-							"query": [
-								{
-									"key": "username",
-									"value": "{{api_user_name}}",
-									"description": "Enter your user name for your API User"
+					"name": "Standard Login and Logout",
+					"item": [
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
-								{
-									"key": "password",
-									"value": "{{api_password}}",
-									"description": "Enter your password for your API User"
-								},
-								{
-									"key": "clientId",
-									"value": "Postman",
-									"description": "Name of client logging in with API User",
-									"disabled": true
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/login?username={{username}}&password={{password}}",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"login"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{username}}",
+											"description": "Enter your user name"
+										},
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"description": "Enter your user password"
+										}
+									]
 								}
-							]
+							},
+							"response": []
 						},
-						"description": "If there is a API user available then use this login call. "
-					},
-					"response": []
+						{
+							"name": "Logout",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/logout",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				},
 				{
-					"name": "Logout use with 'api'",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/logout",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"logout"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Login using 'login'",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/login?username={{username}}&password={{password}}",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"login"
-							],
-							"query": [
-								{
-									"key": "username",
-									"value": "{{username}}",
-									"description": "Enter your user name"
+					"name": "API Login and Logout",
+					"item": [
+						{
+							"name": "Login using 'apilogin'",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
-								{
-									"key": "password",
-									"value": "{{password}}",
-									"description": "Enter your user password"
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/apilogin?username={{api_user_name}}&password={{api_password}}&clientId=Postman",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"apilogin"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{api_user_name}}",
+											"description": "Enter your user name for your API User"
+										},
+										{
+											"key": "password",
+											"value": "{{api_password}}",
+											"description": "Enter your password for your API User"
+										},
+										{
+											"key": "clientId",
+											"value": "Postman",
+											"description": "Name of client logging in with API User"
+										}
+									]
+								},
+								"description": "If there is a API user available then use this login call. "
+							},
+							"response": []
+						},
+						{
+							"name": "Logout use with 'api'",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{authToken}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/logout",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"logout"
+									]
 								}
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Logout - use with 'Login' call",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{Assets_Server_URL}}/services/logout",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"services",
-								"logout"
-							]
-						}
-					},
-					"response": []
+					]
 				}
 			]
 		},
@@ -150,6 +176,13 @@
 							{
 								"key": "X-CSRF-TOKEN",
 								"value": "{{Current X-CRSF-TOKEN}}",
+								"type": "text",
+								"description": "Used with Login calls"
+							},
+							{
+								"key": "Cookie",
+								"value": "authToken={{authToken}}",
+								"description": "Used with 'Apilogin' calls",
 								"type": "text"
 							}
 						],
@@ -180,6 +213,11 @@
 							{
 								"key": "X-CSRF-TOKEN",
 								"value": "{{Current X-CRSF-TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "authToken={{authToken}}",
 								"type": "text"
 							}
 						],
@@ -212,6 +250,11 @@
 								"key": "X-CSRF-TOKEN",
 								"value": "{{Current X-CRSF-TOKEN}}",
 								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "authToken={{authToken}}",
+								"type": "text"
 							}
 						],
 						"url": {
@@ -242,6 +285,11 @@
 							{
 								"key": "X-CSRF-TOKEN",
 								"value": "{{Current X-CRSF-TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "authToken={{authToken}}",
 								"type": "text"
 							}
 						],
@@ -281,6 +329,13 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"description": "use with 'Login'",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"description": "use with 'Apilogin'",
 										"type": "text"
 									}
 								],
@@ -332,6 +387,13 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"description": "Use with 'Login' ",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"description": "Use with 'Apilogin'",
 										"type": "text"
 									}
 								],
@@ -418,7 +480,7 @@
 					]
 				},
 				{
-					"name": "Working with Assets",
+					"name": "Working with assets",
 					"item": [
 						{
 							"name": "Create",
@@ -429,6 +491,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"description": "Use the X-CSRF-TOKEN value from your login",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -481,10 +548,9 @@
 										"type": "text"
 									},
 									{
-										"key": "",
-										"value": "",
-										"type": "text",
-										"disabled": true
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -522,6 +588,11 @@
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"description": "Get the token from the login values returned",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -554,6 +625,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -585,6 +661,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -656,6 +737,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -686,8 +772,7 @@
 										},
 										{
 											"key": "q",
-											"value": null,
-											"description": "Required. A query that matches all assets to be removed. Be careful with this and make sure you test your query using a search call to prevent removing assets that you did not want to be removed."
+											"value": null
 										},
 										{
 											"key": "ids",
@@ -711,6 +796,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"description": "Use the X-CSRF-TOKEN value from your login",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -767,6 +857,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"description": "Use the X-CSRF-TOKEN value from your login",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -840,6 +935,11 @@
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"description": "Use the X-CSRF-TOKEN value from your login",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -896,6 +996,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -941,6 +1046,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -979,6 +1089,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -1025,6 +1140,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -1126,6 +1246,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -1258,6 +1383,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -1303,6 +1433,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -1339,6 +1474,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -1373,6 +1513,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -1406,6 +1551,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -1450,6 +1600,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -1497,6 +1652,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -1529,6 +1689,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -1580,6 +1745,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -1625,7 +1795,7 @@
 			"name": "REST API - Management Console",
 			"item": [
 				{
-					"name": "asset",
+					"name": "Working with assets",
 					"item": [
 						{
 							"name": "Create Asset - API",
@@ -1635,6 +1805,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -1675,6 +1850,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -1740,6 +1920,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -1790,6 +1975,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -1913,6 +2103,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -1945,6 +2140,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -1979,6 +2179,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -2012,6 +2217,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -2036,6 +2246,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -2062,6 +2277,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -2105,6 +2325,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -2147,6 +2372,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"url": {
@@ -2172,6 +2402,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cooki",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -2203,6 +2438,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -2242,6 +2482,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -2277,6 +2522,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -2321,6 +2571,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -2381,6 +2636,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -2440,6 +2700,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -2474,6 +2739,11 @@
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
 										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -2507,6 +2777,11 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
 								],
@@ -2565,12 +2840,12 @@
 		},
 		{
 			"key": "{{username}}",
-			"value": "woodwing",
+			"value": "",
 			"type": "string"
 		},
 		{
 			"key": "{{password}}",
-			"value": "ww",
+			"value": "",
 			"type": "string"
 		}
 	]
