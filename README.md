@@ -49,29 +49,70 @@ v0.1 - Initial release of the collection
 4. Metadata report using 'login', JSON and a 'assetPath' query
 
 ### Operations
-1. Create
+#### Search and Browse
+1. Browse
 2. Search
-3. Copy
-4. Create Relation
-5. Checkout
-6. Undo Checkout
 
-### Calls not yet included
-1. browse
-2. createAuthKey
-3. createFolder
-4. E-mail
-5. localization
-6. log usage stats
-7. move / rename
-8. profile
-9. promote
-10. remove
-11. remove relation
-12. Rendition Presets
-13. revokeAuthKeys
-14. updateAuthKey
-15. updatebulk
-16. update / check-in
-17. versioning and history
-18. Zip Download
+#### Working with Assets
+1. Create
+2. Copy
+3. Checkout
+4. Undo Checkout
+5. Move / Rename
+6. Remove
+7. Update bulk
+8. Update / check in
+9. Versioning and History
+10. Log Usage Stats
+
+#### Relations
+1. Create Relation
+2. Remove Relation
+
+#### Auth Keys (Sharelinks)
+1. Create Auth Key
+2. Update Auth Key
+3. Revoke Auth Key
+
+#### Folders
+1. Create Folder
+
+#### Renditions
+1. Rendition Preset - List
+2. Rendition Preset - List All
+3. Rendition Preset - Save / Update
+4. Rendition Preset - Remove
+
+#### Misc
+1. Email
+2. Localization
+3. Profile
+
+### REST API - Management Console
+Note that these calls are documented within the Management Console of Assets.
+#### Assets
+1. Create Asset
+2. Create Asset Upload
+3. Search
+4. Signed Image Rendition URL
+5. Signed Original URL
+6. Signed Preview URL
+7. Signed Thumbnail URL
+8. Get Specific Asset
+9. Download Asset Original
+10. Upload Asset (Multi-part form) [POST]
+11. Upload Asset (Multi-part form) [PUT]
+12. Download Asset Preview
+13. Download Asset Thumbnail
+
+#### Create Sharelink
+1. Create Sharelink
+
+#### Folder
+1. Create Folder (with metadata)
+2. Get Folder by Path
+3. List folders
+4. Folder Search
+5. Get Folder by id
+6. Update Folder Metadata
+7. Delete Folder
