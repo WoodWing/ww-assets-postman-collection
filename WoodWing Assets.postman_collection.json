@@ -18,34 +18,30 @@
 								"method": "POST",
 								"header": [],
 								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "{{username}}",
+											"description": "Enter your user name",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"description": "Enter your user password",
+											"type": "text"
 										}
-									}
+									]
 								},
 								"url": {
-									"raw": "{{Assets_Server_URL}}/services/login?username={{username}}&password={{password}}",
+									"raw": "{{Assets_Server_URL}}/services/login",
 									"host": [
 										"{{Assets_Server_URL}}"
 									],
 									"path": [
 										"services",
 										"login"
-									],
-									"query": [
-										{
-											"key": "username",
-											"value": "{{username}}",
-											"description": "Enter your user name"
-										},
-										{
-											"key": "password",
-											"value": "{{password}}",
-											"description": "Enter your user password"
-										}
 									]
 								}
 							},
@@ -92,39 +88,36 @@
 								"method": "POST",
 								"header": [],
 								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "{{api_user_name}}",
+											"description": "Enter your user name for your API User",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "{{api_password}}",
+											"description": "Enter your password for your API User",
+											"type": "text"
+										},
+										{
+											"key": "clientId",
+											"value": "Postman",
+											"description": "Name of client logging in with API User",
+											"type": "text"
 										}
-									}
+									]
 								},
 								"url": {
-									"raw": "{{Assets_Server_URL}}/services/apilogin?username={{api_user_name}}&password={{api_password}}&clientId=Postman",
+									"raw": "{{Assets_Server_URL}}/services/apilogin",
 									"host": [
 										"{{Assets_Server_URL}}"
 									],
 									"path": [
 										"services",
 										"apilogin"
-									],
-									"query": [
-										{
-											"key": "username",
-											"value": "{{api_user_name}}",
-											"description": "Enter your user name for your API User"
-										},
-										{
-											"key": "password",
-											"value": "{{api_password}}",
-											"description": "Enter your password for your API User"
-										},
-										{
-											"key": "clientId",
-											"value": "Postman",
-											"description": "Name of client logging in with API User"
-										}
 									]
 								},
 								"description": "If there is a API user available then use this login call. "
