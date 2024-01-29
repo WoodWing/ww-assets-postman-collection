@@ -18,30 +18,32 @@ The relationship between the Collection and the Environments is particularly hel
 In our environment, named 'WoodWing Assets', we have 4 variables:
 
 1. Assets_Server_URL - referenced in the collection as {{Assets_Server_URL}}
-2. username - references in the collection as {{username}}
-3. password - references in the collection as {{password}}
-4. Current X-CRSF-TOKEN - references in the collection as {{Current X-CRSF-TOKEN}}
+2. username - referenced in the collection as {{username}}
+3. password - referenced in the collection as {{password}}
+4. Current X-CRSF-TOKEN - referenced in the collection as {{Current X-CRSF-TOKEN}}
+5. api_user_name - referenced in the collection as {{api_user_name}}
+6. api_password - referenced in the collection as {{api_password}}
+7. authToken - referenced in the collection as {{auth_token}}
+8. ids - referenced in the collection as {{ids}} => meant to be an array of Assets IDs
+9. id - referenced in the collection as {{id}} => Individual ID of an asset
+10. folder_id - referenced in the collection as {{folder_id}}
+11. external_engine_id - referenced in the collection as {{external_engine_id}}
 
 Here is a short video showing how Collections and Environments work: 
-
-
 
 # Flows
 Flows are for the creation of a complete set of calls and responses to the API endpoint. Seeing is believing so here is a short video showing the basic creation and usage of a Flow using the Collection and the Environment:
 
-
-
 ## Release Notes
-v0.1 - Initial release of the collection
-v0.2 - Extensive changes to the collection. All 'Assets' calls are now included in the collection. I've added a variety of variables to an environment and use those variables through the collection. Will document those ASAP.
+1. v0.1 - Initial release of the collection
+2. v0.2 - Extensive changes to the collection. All 'Assets' calls are now included in the collection. I've added a variety of variables to an environment and use those variables through the collection. 
+3. v0.3 - Extensive changes to the collection. Added External Processing and Metrics. Added Environment file and description of variables in the Environment file.
 
 ## Calls contained within the collection
 
 ### Login and Logout
-1. Login Using 'apilogin'
-2. Logout
-3. Login using 'login'
-4. Logout
+1. Standard Login and Logout
+3. API Login and Logout Logout
 
 ### Metadata Reports
 1. Metadata report call asking for JSON and using a query to get all assets with status of Production
@@ -91,9 +93,9 @@ v0.2 - Extensive changes to the collection. All 'Assets' calls are now included 
 
 ### REST API - Management Console
 Note that these calls are documented within the Management Console of Assets.
-#### Assets
+#### Working with Assets
 1. Create Asset
-2. Create Asset Upload
+2. Create Asset - API Upload
 3. Search
 4. Signed Image Rendition URL
 5. Signed Original URL
@@ -117,3 +119,14 @@ Note that these calls are documented within the Management Console of Assets.
 5. Get Folder by id
 6. Update Folder Metadata
 7. Delete Folder
+
+### External processing (not in final form)
+1. Create External Engine
+2. Get All External Engines
+3. Get External Engines by ID
+4. Update External Engines by ID
+5. Delete External Engines by ID
+6. Delete All External Engines
+
+### Metrics
+1. Get Assets Metrics
