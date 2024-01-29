@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b4c0dff7-0e59-4b31-835e-75d60cf2d1e3",
+		"_postman_id": "fa09618a-edc5-45fb-9c85-6617837a3255",
 		"name": "WoodWing Assets",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "2558053"
@@ -403,7 +403,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{Assets_Server_URL}}/services/search?q=apollo",
+									"raw": "{{Assets_Server_URL}}/services/search?q=tree",
 									"host": [
 										"{{Assets_Server_URL}}"
 									],
@@ -414,66 +414,66 @@
 									"query": [
 										{
 											"key": "q",
-											"value": "apollo",
+											"value": "tree",
 											"description": "Required. Query asking for Assets with the value of 'apollo'. Lots of ways to query. Start here for docs: https://helpcenter.woodwing.com/hc/en-us/articles/360041851432"
 										},
 										{
 											"key": "start",
-											"value": null,
+											"value": "",
 											"description": "Optional First hit to be returned. Starting at 0 for the first hit. Used for paging",
 											"disabled": true
 										},
 										{
 											"key": "num",
-											"value": null,
+											"value": "",
 											"description": "Optional. Number of hits to return. Default is 50. 0 returns no hits.",
 											"disabled": true
 										},
 										{
 											"key": "sort",
-											"value": null,
+											"value": "",
 											"description": "Optional. The sort order of returned hits. Comma-delimited list of fields to sort on.\n",
 											"disabled": true
 										},
 										{
 											"key": "metadataToReturn",
-											"value": null,
+											"value": "",
 											"description": "Optional. For all fields use 'metadataToReturn=all', Leave null for only minimal fields. Default returns all fields. ",
 											"disabled": true
 										},
 										{
 											"key": "facets",
-											"value": null,
+											"value": "",
 											"description": "Optional. Comma-delimited list fiels to return facets for. Ex: facets=tags,assetDomain",
 											"disabled": true
 										},
 										{
 											"key": "facet.<field>.selection",
-											"value": null,
+											"value": "",
 											"description": "Optional. Replace <field> with the appropriate field you want. Ex: facet.assetDomain.selection=image,video\n",
 											"disabled": true
 										},
 										{
 											"key": "appendRequestSecret",
-											"value": null,
+											"value": "",
 											"description": "Optional. Default is false. Use when retrieving thumb, preview or original URL's and you won't need to authenticate against the server again.",
 											"disabled": true
 										},
 										{
 											"key": "returnHighlightedText",
-											"value": null,
+											"value": "",
 											"description": "Optional. Default is true. Any found text is highlighted.",
 											"disabled": true
 										},
 										{
 											"key": "returnThumbnailHits",
-											"value": null,
+											"value": "",
 											"description": "Optional. Default for 6.75 and higher is false, 6.74 and lower true.  Collections returned in the results have an additional array with up to 4 thumbnailHits",
 											"disabled": true
 										},
 										{
 											"key": "logSearch",
-											"value": null,
+											"value": "",
 											"description": "Optional. Default is true. When set to true, an entry for this search is written to the Stats index.",
 											"disabled": true
 										}
@@ -2322,7 +2322,7 @@
 							"response": []
 						},
 						{
-							"name": "Upload Asset (Multi-Part form data) Copy",
+							"name": "Upload Asset (PUT)",
 							"request": {
 								"method": "PUT",
 								"header": [
@@ -2814,6 +2814,295 @@
 							"response": []
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "External processing",
+			"item": [
+				{
+					"name": "Create External Engine",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "{{Current X-CRSF-TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "authToken={{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"name\": \"engine 1\",\n        \"url\": \"http://192.168.1.1:5000/api/processing\",\n        \"renditions\": [],\n        \"assetTypes\": [\n            \"png\"\n        ],\n        \"enabled\": true,\n        \"returnStorageInfo\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Assets_Server_URL}}/services/admin/externalProcessing",
+							"host": [
+								"{{Assets_Server_URL}}"
+							],
+							"path": [
+								"services",
+								"admin",
+								"externalProcessing"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All External Engines",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "{{Current X-CRSF-TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "authToken={{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Assets_Server_URL}}/services/admin/externalProcessing",
+							"host": [
+								"{{Assets_Server_URL}}"
+							],
+							"path": [
+								"services",
+								"admin",
+								"externalProcessing"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get External Engines by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "{{Current X-CRSF-TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "authToken={{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Assets_Server_URL}}/services/admin/externalProcessing/{{external_engine_id}}",
+							"host": [
+								"{{Assets_Server_URL}}"
+							],
+							"path": [
+								"services",
+								"admin",
+								"externalProcessing",
+								"{{external_engine_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update External Engines by ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "{{Current X-CRSF-TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "authToken={{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"6i5ZgefYqjh9AIpZY2FgQq\",\n    \"name\": \"engine 1\",\n    \"url\": \"http://192.168.1.1:5000/api/processing\",\n    \"thumbnailUrl\": null,\n    \"assetTypes\": [\n        \"png\",\"jpg\"\n    ],\n    \"enabled\": true,\n    \"returnStorageInfo\": true,\n    \"renditions\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Assets_Server_URL}}/services/admin/externalProcessing/{{external_engine_id}}",
+							"host": [
+								"{{Assets_Server_URL}}"
+							],
+							"path": [
+								"services",
+								"admin",
+								"externalProcessing",
+								"{{external_engine_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete External Engines by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "{{Current X-CRSF-TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "authToken={{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Assets_Server_URL}}/services/admin/externalProcessing/{{external_engine_id}}",
+							"host": [
+								"{{Assets_Server_URL}}"
+							],
+							"path": [
+								"services",
+								"admin",
+								"externalProcessing",
+								"{{external_engine_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete All External Engines",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "{{Current X-CRSF-TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "authToken={{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Assets_Server_URL}}/services/admin/externalProcessing/{{external_engine_id}}",
+							"host": [
+								"{{Assets_Server_URL}}"
+							],
+							"path": [
+								"services",
+								"admin",
+								"externalProcessing",
+								"{{external_engine_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Metrics",
+			"item": [
+				{
+					"name": "Get Assets Metrics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Assets_Server_URL}}/services/system/metrics?X-CSRF-TOKEN={{Current X-CRSF-TOKEN}}&Cookie=authToken={{authToken}}",
+							"host": [
+								"{{Assets_Server_URL}}"
+							],
+							"path": [
+								"services",
+								"system",
+								"metrics"
+							],
+							"query": [
+								{
+									"key": "X-CSRF-TOKEN",
+									"value": "{{Current X-CRSF-TOKEN}}"
+								},
+								{
+									"key": "Cookie",
+									"value": "authToken={{authToken}}"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
