@@ -15,7 +15,7 @@ Please note that to use this collection you will need to create your Environment
 
 The relationship between the Collection and the Environments is particularly helpful. Environments allows us to create variables, attach values to the variables and then pass the variable value(s) to subsequent calls. The variables can be used calling each individual call within the collection or you can set up a Flow to use them.
 
-In our environment, named 'WoodWing Assets', we have 4 variables:
+In our environment, named 'WoodWing Assets', we have 11 variables:
 
 1. Assets_Server_URL - referenced in the collection as {{Assets_Server_URL}}
 2. username - referenced in the collection as {{username}}
