@@ -39,6 +39,41 @@ Flows are for the creation of a complete set of calls and responses to the API e
 1. v0.1 - Initial release of the collection
 2. v0.2 - Extensive changes to the collection. All 'Assets' calls are now included in the collection. I've added a variety of variables to an environment and use those variables through the collection. 
 3. v0.3 - Extensive changes to the collection. Added External Processing and Metrics. Added Environment file and description of variables in the Environment file.
+4. v0.4 - ## Comprehensive review and cleanup of the Assets 6 Postman collection
+
+**Endpoint fixes:**
+- Create Auth Key: point at `/services/createAuthKey` instead of `/services/browse` (leftover copy-paste); correct `assetIds` param casing
+- Download Asset Preview: point at `.../preview` instead of duplicating `.../original`
+- Delete All External Engines: point at `.../externalProcessing/all` instead of duplicating the single-engine delete-by-id call
+- Profile: point at `/services/profile` instead of `/services/version/promote`
+- E-mail: fix path typo, `/notifiy/email` -> `/notify/email`
+
+**Auth header fixes:**
+- Fix Cookie header key typo ("Cooki" -> "Cookie") on Download Asset Thumbnail
+- Standard Logout: enable `X-CSRF-TOKEN` (was incorrectly disabled)
+- API Logout: remove `X-CSRF-TOKEN` header entirely (this flow authenticates via cookie only, per confirmed server behavior)
+- Get Assets Metrics: drop CSRF token/cookie from the query string and the stray empty header; this endpoint requires no auth
+- Repoint collection-level Bearer auth to `{{authToken}}` (was referencing a nonexistent `{{Current AUTH-TOKEN}}`)
+- Fix malformed collection-level variable keys (stripped literal `{{ }}` from key names so they resolve correctly)
+
+**Remove hardcoded values:**
+- Replace a live-looking signed requestSecret token with a `{{requestSecret}}` variable
+- Replace hardcoded literal asset IDs in Checkout, Undo Checkout, and Create Asset - API Upload with `{{id}}`
+
+**Clean up leftover test artifacts:**
+- Rename `jeff.json`/`jeff.csv` report filenames to `report.json`/`report.csv`
+- Clear the `"name=jeff was here"` placeholder value
+
+**Remove duplicate request:**
+- "Metadata report using 'login', JSON and a 'assetPath' query" was functionally identical to the existing assetPath example
+
+**Fill gaps vs. the Assets 6 API documentation:**
+- Add Promote Version (restores coverage lost when Profile was corrected above), ZIP Download, and a new Processes folder (Get Process Status, Cancel Process)
+
+**Documentation:**
+- Add descriptions to every request and folder, plus a collection-level description
+
+**Net result:** 61 requests -> 60 (duplicate removed) -> 64 (three gaps filled), all endpoints verified, no known bugs remaining.
 
 ## Calls contained within the collection
 
