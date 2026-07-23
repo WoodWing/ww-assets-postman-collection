@@ -3,7 +3,8 @@
 		"_postman_id": "fa09618a-edc5-45fb-9c85-6617837a3255",
 		"name": "WoodWing Assets",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "2558053"
+		"_exporter_id": "2558053",
+		"description": "A Postman collection for working with WoodWing Assets, covering both the legacy /services API and the newer REST (/api) API, plus example environment variables for authentication."
 	},
 	"item": [
 		{
@@ -43,7 +44,8 @@
 										"services",
 										"login"
 									]
-								}
+								},
+								"description": "Authenticates against Assets Server with {{username}} and {{password}} and starts a session. The response includes serverVersion, userProfile, and a csrfToken \u2014 store the csrfToken as {{Current X-CRSF-TOKEN}} and send it as the X-CSRF-TOKEN header on subsequent write requests in this session."
 							},
 							"response": []
 						},
@@ -55,8 +57,7 @@
 									{
 										"key": "X-CSRF-TOKEN",
 										"value": "{{Current X-CRSF-TOKEN}}",
-										"type": "text",
-										"disabled": true
+										"type": "text"
 									},
 									{
 										"key": "Cookie",
@@ -73,11 +74,13 @@
 										"services",
 										"logout"
 									]
-								}
+								},
+								"description": "Ends the session created by Login. Requires the session cookie and the X-CSRF-TOKEN header obtained at login."
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "Session-based login and logout using a regular username/password credential pair. This flow uses both a session cookie and an X-CSRF-TOKEN header."
 				},
 				{
 					"name": "API Login and Logout",
@@ -132,7 +135,7 @@
 										"apilogin"
 									]
 								},
-								"description": "If there is a API user available then use this login call. "
+								"description": "Use this login call when a dedicated API user is available (as opposed to a regular interactive user). Authenticates with {{api_user_name}} / {{api_password}} and returns a session cookie. This flow does not require a CSRF token."
 							},
 							"response": []
 						},
@@ -141,12 +144,6 @@
 							"request": {
 								"method": "POST",
 								"header": [
-									{
-										"key": "X-CSRF-TOKEN",
-										"value": "{{authToken}}",
-										"type": "text",
-										"disabled": true
-									},
 									{
 										"key": "Cookie",
 										"value": "authToken={{authToken}}",
@@ -162,13 +159,16 @@
 										"services",
 										"logout"
 									]
-								}
+								},
+								"description": "Ends the session created by Login using 'apilogin'. This flow authenticates via the session cookie only \u2014 no CSRF token is required."
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "Login and logout using a dedicated API user (api_user_name/api_password). This flow authenticates via the session cookie only; no CSRF token is required."
 				}
-			]
+			],
+			"description": "Authentication calls for Assets Server: the standard session-based login/logout flow (cookie + CSRF token), and the API-key-based apilogin/logout flow (cookie only, no CSRF)."
 		},
 		{
 			"name": "Metadata Reports",
@@ -192,13 +192,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{Assets_Server_URL}}/metadata/jeff.json?q=status:Production",
+							"raw": "{{Assets_Server_URL}}/metadata/report.json?q=status:Production",
 							"host": [
 								"{{Assets_Server_URL}}"
 							],
 							"path": [
 								"metadata",
-								"jeff.json"
+								"report.json"
 							],
 							"query": [
 								{
@@ -206,7 +206,8 @@
 									"value": "status:Production"
 								}
 							]
-						}
+						},
+						"description": "Generates a metadata report in JSON for all assets matching the query `status:Production`. The `report` segment in the URL path is just the output filename, not a saved report definition, and can be renamed freely."
 					},
 					"response": []
 				},
@@ -227,13 +228,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{Assets_Server_URL}}/metadata/jeff.csv?q=status:Production",
+							"raw": "{{Assets_Server_URL}}/metadata/report.csv?q=status:Production",
 							"host": [
 								"{{Assets_Server_URL}}"
 							],
 							"path": [
 								"metadata",
-								"jeff.csv"
+								"report.csv"
 							],
 							"query": [
 								{
@@ -242,7 +243,8 @@
 									"description": "Query for repor that asks for all assets whose status is 'production'"
 								}
 							]
-						}
+						},
+						"description": "Same report as the JSON version above, returned as CSV \u2014 useful for opening directly in Excel."
 					},
 					"response": []
 				},
@@ -263,13 +265,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{Assets_Server_URL}}/metadata/jeff.json?assetPath=",
+							"raw": "{{Assets_Server_URL}}/metadata/report.json?assetPath=",
 							"host": [
 								"{{Assets_Server_URL}}"
 							],
 							"path": [
 								"metadata",
-								"jeff.json"
+								"report.json"
 							],
 							"query": [
 								{
@@ -278,47 +280,13 @@
 									"description": "This is the path to the Assets you want to report on"
 								}
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Metadata report using 'login', JSON and a 'assetPath' query",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-CSRF-TOKEN",
-								"value": "{{Current X-CRSF-TOKEN}}",
-								"type": "text"
-							},
-							{
-								"key": "Cookie",
-								"value": "authToken={{authToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{Assets_Server_URL}}/metadata/jeff.json?assetPath=",
-							"host": [
-								"{{Assets_Server_URL}}"
-							],
-							"path": [
-								"metadata",
-								"jeff.json"
-							],
-							"query": [
-								{
-									"key": "assetPath",
-									"value": "",
-									"description": "Path to Assets in your system that you want to generate a report from"
-								}
-							]
-						}
+						},
+						"description": "Generates a metadata report in JSON for all assets under the folder given in the `assetPath` parameter, instead of a query."
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Generates downloadable metadata reports (JSON or CSV) for assets matching a query or folder path, using the legacy /metadata/{name}.{format} endpoint."
 		},
 		{
 			"name": "Operations",
@@ -380,7 +348,8 @@
 											"description": "Comma-delimited list of extensions"
 										}
 									]
-								}
+								},
+								"description": "Lists the folders and/or assets directly under a given folder `path` (hierarchical browsing, similar to a file system directory listing). Use `includeFolders`/`includeAssets`/`includeExtensions` to control what's returned, and `fromRoot` to browse from the root instead of a specific path."
 							},
 							"response": []
 						},
@@ -478,11 +447,13 @@
 											"disabled": true
 										}
 									]
-								}
+								},
+								"description": "Full-text and metadata search across all assets using Assets Server's query syntax (here searching for `tree`). Returns matching assets with metadata and ready-to-use thumbnail/preview/original URLs."
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "Locating assets: hierarchical folder/tree browsing (Browse) and free-text/metadata search (Search)."
 				},
 				{
 					"name": "Working with assets",
@@ -538,7 +509,8 @@
 										"services",
 										"create"
 									]
-								}
+								},
+								"description": "Uploads a new file (or creates a virtual/collection asset) and sets its initial metadata."
 							},
 							"response": []
 						},
@@ -579,7 +551,8 @@
 											"description": "The destination path of the file plus the name"
 										}
 									]
-								}
+								},
+								"description": "Creates a duplicate of an asset at a new location, specified via `source` and `target`."
 							},
 							"response": []
 						},
@@ -601,14 +574,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{Assets_Server_URL}}/services/checkout/4fiKrpWsaN1ARGAut1jyKU",
+									"raw": "{{Assets_Server_URL}}/services/checkout/{{id}}",
 									"host": [
 										"{{Assets_Server_URL}}"
 									],
 									"path": [
 										"services",
 										"checkout",
-										"4fiKrpWsaN1ARGAut1jyKU"
+										"{{id}}"
 									],
 									"query": [
 										{
@@ -617,7 +590,8 @@
 											"disabled": true
 										}
 									]
-								}
+								},
+								"description": "Locks the asset at {{id}} for editing, preventing other users from checking in changes until it's checked back in or the checkout is undone."
 							},
 							"response": []
 						},
@@ -638,14 +612,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{Assets_Server_URL}}/services/undocheckout/4fiKrpWsaN1ARGAut1jyKU",
+									"raw": "{{Assets_Server_URL}}/services/undocheckout/{{id}}",
 									"host": [
 										"{{Assets_Server_URL}}"
 									],
 									"path": [
 										"services",
 										"undocheckout",
-										"4fiKrpWsaN1ARGAut1jyKU"
+										"{{id}}"
 									],
 									"query": [
 										{
@@ -654,7 +628,8 @@
 											"disabled": true
 										}
 									]
-								}
+								},
+								"description": "Releases a checkout on {{id}} without saving any changes, unlocking the asset again."
 							},
 							"response": []
 						},
@@ -729,7 +704,8 @@
 											"description": "Optional. True/False. When true, the process will run asynchronous in the background. The call will return immediate with the processId."
 										}
 									]
-								}
+								},
+								"description": "Moves and/or renames an asset from `source` to `target`. `folderReplacePolicy`/`fileReplacePolicy` control conflict handling, and `async` allows the operation to run in the background for large moves."
 							},
 							"response": []
 						},
@@ -788,7 +764,8 @@
 											"value": null
 										}
 									]
-								}
+								},
+								"description": "Deletes assets matching a query (`q`), a list of ids (`ids`), or everything under a folder (`folderPath`)."
 							},
 							"response": []
 						},
@@ -849,7 +826,8 @@
 											"description": "Optional. Default true. Prevents parsing \"+\" and \"-\" when set to false."
 										}
 									]
-								}
+								},
+								"description": "Updates metadata on multiple assets at once, targeted either by a search query (`q`) or by an explicit list of ids/metadata objects passed in the request body. Supports async execution and metadata append/remove semantics via `parseMetadataModifications`."
 							},
 							"response": []
 						},
@@ -926,7 +904,8 @@
 										"services",
 										"update"
 									]
-								}
+								},
+								"description": "Updates metadata on a single existing asset (and checks it in if it was checked out). Behaves like Create, but targets an existing asset via `id`."
 							},
 							"response": []
 						},
@@ -988,7 +967,103 @@
 											"description": "Optional. Default is empty. Returns all actions."
 										}
 									]
-								}
+								},
+								"description": "Retrieves the version and change history for an asset \u2014 uploads, metadata edits, moves, and more \u2014 with pagination via `start`/`num` and detail controlled by `detailLevel`/`actions`."
+							},
+							"response": []
+						},
+						{
+							"name": "Promote Version",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"description": "Use the X-CSRF-TOKEN value from your login",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/version/promote?assetId={{id}}&version",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"version",
+										"promote"
+									],
+									"query": [
+										{
+											"key": "assetId",
+											"value": "{{id}}",
+											"description": "Required. ID of the asset which needs to be reverted."
+										},
+										{
+											"key": "version",
+											"value": null,
+											"description": "Required. Version number of the version to which the asset needs to be reverted."
+										}
+									]
+								},
+								"description": "Promotes a previous version of an asset (given by `version`) back to being the current version of {{id}}."
+							},
+							"response": []
+						},
+						{
+							"name": "ZIP Download",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"description": "Use the X-CSRF-TOKEN value from your login",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/zip/archive.zip?assetIds&downloadKind=preview",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"zip",
+										"archive.zip"
+									],
+									"query": [
+										{
+											"key": "assetIds",
+											"value": null,
+											"description": "Comma-separated list of asset ids for the ZIP file. Exactly one of assetIds, q, or folderPath must be specified."
+										},
+										{
+											"key": "downloadKind",
+											"value": "preview",
+											"description": "File type to include: original or preview. Exactly one of downloadKind, downloadPresetId, or previewFormat must be specified."
+										}
+									]
+								},
+								"description": "Downloads multiple assets as a single ZIP archive. Select assets via `assetIds`, a search query (`q`), or `folderPath` (exactly one required), and choose the file type via `downloadKind` (original/preview), `downloadPresetId`, or `previewFormat` (exactly one required). The `archive.zip` segment in the path is just the output filename and can be renamed freely."
 							},
 							"response": []
 						},
@@ -1033,11 +1108,13 @@
 											"value": null
 										}
 									]
-								}
+								},
+								"description": "Records a usage event (e.g. a view or download) against `assetID`, tagged with an `action` label, for usage reporting."
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "Core lifecycle operations on individual or bulk assets: create, copy, checkout/undo checkout, move/rename, remove, bulk and single metadata updates, version history, and usage logging."
 				},
 				{
 					"name": "Relations",
@@ -1082,7 +1159,8 @@
 											"value": null
 										}
 									]
-								}
+								},
+								"description": "Creates a relationship between two assets (`target1Id` and `target2Id`) of a given `relationType` \u2014 e.g. linking an InDesign layout to an image it uses."
 							},
 							"response": []
 						},
@@ -1128,11 +1206,13 @@
 											"description": "Required. Comma-delimited list of relation ids. A comma-delimited list of relation ids to be removed. To find the relation ids, use a relation search."
 										}
 									]
-								}
+								},
+								"description": "Removes one or more existing asset relations by their relation ids."
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "Linking and unlinking relationships between two assets (e.g. an InDesign layout and its linked images)."
 				},
 				{
 					"name": "Auth Keys (Sharelinks)",
@@ -1154,13 +1234,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{Assets_Server_URL}}/services/browse?subject&validUntil&assetIDs&description&downloadOriginal&downloadPreview&requestApproval&requestUpload&containerId&containerIds&importFolderPath&notifyEmail&sort&downloadPresetIds&watermarked",
+									"raw": "{{Assets_Server_URL}}/services/createAuthKey?subject&validUntil&assetIds&description&downloadOriginal&downloadPreview&requestApproval&requestUpload&containerId&containerIds&importFolderPath&notifyEmail&sort&downloadPresetIds&watermarked",
 									"host": [
 										"{{Assets_Server_URL}}"
 									],
 									"path": [
 										"services",
-										"browse"
+										"createAuthKey"
 									],
 									"query": [
 										{
@@ -1174,7 +1254,7 @@
 											"description": "Required - Expiry Date (for Format see Date Patterns here: https://helpcenter.woodwing.com/hc/en-us/articles/360041854192"
 										},
 										{
-											"key": "assetIDs",
+											"key": "assetIds",
 											"value": null,
 											"description": "Comma delimited list of Asset IDs"
 										},
@@ -1239,7 +1319,8 @@
 											"description": "Shows watermarks on thumbnails and previews in Shared Links. Optional"
 										}
 									]
-								}
+								},
+								"description": "Creates a Shared Link (authKey) for the given `assetIds`, with an expiry (`validUntil`) and access options such as `downloadOriginal`, `downloadPreview`, `requestApproval`, and `requestUpload`. Returns the authKey plus ready-to-use web/desktop/mobile client URLs."
 							},
 							"response": []
 						},
@@ -1375,7 +1456,8 @@
 											"description": "Optional. Comma-delimited list of Download Preset id's. Allows the downloading of renditions generated according to these Preset settings."
 										}
 									]
-								}
+								},
+								"description": "Updates properties (subject, expiry, description, access options) of an existing Shared Link identified by `key`. Note: assets/ids on the link cannot be changed after creation."
 							},
 							"response": []
 						},
@@ -1420,11 +1502,13 @@
 											"description": "Required. Comma-delimited list of authKeys."
 										}
 									]
-								}
+								},
+								"description": "Immediately revokes one or more Shared Links, identified by `keys`, so their URLs stop working."
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "Creating, updating, and revoking Shared Links (authKeys) that let external users view, download, or upload assets without an Assets Server login."
 				},
 				{
 					"name": "Folders",
@@ -1461,11 +1545,13 @@
 											"description": "The full folderPath of the folder to be created. Required. To create multiple folders repeat the 'path' parameter multiple times, each with a unique folder path"
 										}
 									]
-								}
+								},
+								"description": "Creates a new folder at the given `path` in the Assets folder tree, using the legacy /services API."
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "Creating folders in the Assets folder tree via the legacy API."
 				},
 				{
 					"name": "Renditions",
@@ -1505,7 +1591,8 @@
 										"renditionpreset",
 										"list"
 									]
-								}
+								},
+								"description": "Lists the Rendition Presets available to the current user."
 							},
 							"response": []
 						},
@@ -1544,7 +1631,8 @@
 										"renditionpreset",
 										"listAll"
 									]
-								}
+								},
+								"description": "Lists all Rendition Presets in the system (admin-level view, not filtered by user permissions)."
 							},
 							"response": []
 						},
@@ -1574,7 +1662,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{Assets_Server_URL}}/services/renditionpreset/save?id&name=jeff was here",
+									"raw": "{{Assets_Server_URL}}/services/renditionpreset/save?id&name=",
 									"host": [
 										"{{Assets_Server_URL}}"
 									],
@@ -1590,10 +1678,11 @@
 										},
 										{
 											"key": "name",
-											"value": "jeff was here"
+											"value": ""
 										}
 									]
-								}
+								},
+								"description": "Creates a new Rendition Preset, or updates an existing one if `id` is supplied. `name` sets the preset's display name."
 							},
 							"response": []
 						},
@@ -1639,11 +1728,13 @@
 											"description": "Required. ID of preset rendition"
 										}
 									]
-								}
+								},
+								"description": "Deletes one or more Rendition Presets by `ids`."
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "Managing Rendition Presets \u2014 named sets of image/format transformation settings used to generate on-the-fly asset renditions."
 				},
 				{
 					"name": "Misc",
@@ -1674,15 +1765,16 @@
 									}
 								},
 								"url": {
-									"raw": "{{Assets_Server_URL}}/notifiy/email",
+									"raw": "{{Assets_Server_URL}}/notify/email",
 									"host": [
 										"{{Assets_Server_URL}}"
 									],
 									"path": [
-										"notifiy",
+										"notify",
 										"email"
 									]
-								}
+								},
+								"description": "Sends a notification e-mail through Assets Server's built-in mail configuration \u2014 the same mechanism used for Shared Link notifications."
 							},
 							"response": []
 						},
@@ -1737,7 +1829,8 @@
 											"description": "Optional. Default is web. Options are 'web' or 'acm'"
 										}
 									]
-								}
+								},
+								"description": "Retrieves localized UI strings for a given `localeChain` (e.g. `en-US`) and `bundle`, with `ifModifiedSince` support for caching."
 							},
 							"response": []
 						},
@@ -1767,34 +1860,116 @@
 									}
 								},
 								"url": {
-									"raw": "{{Assets_Server_URL}}/services/version/promote?assetID&version",
+									"raw": "{{Assets_Server_URL}}/services/profile",
 									"host": [
 										"{{Assets_Server_URL}}"
 									],
 									"path": [
 										"services",
-										"version",
-										"promote"
-									],
-									"query": [
-										{
-											"key": "assetID",
-											"value": null,
-											"description": "Required. ID of the asset which needs to be reverted."
-										},
-										{
-											"key": "version",
-											"value": null,
-											"description": "Version number of the version to which the asset needs to be reverted."
-										}
+										"profile"
 									]
-								}
+								},
+								"description": "Retrieves details about the user authenticated in the current session (username, full name, user zone, groups, email, and granted authorities)."
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "Supporting utility calls: sending notification e-mails and fetching localized UI strings. Also includes a 'Profile' request whose current endpoint doesn't match its name \u2014 see that request's description."
+				},
+				{
+					"name": "Processes",
+					"item": [
+						{
+							"name": "Get Process Status",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"description": "Use the X-CSRF-TOKEN value from your login",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/process/info?processId",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"process",
+										"info"
+									],
+									"query": [
+										{
+											"key": "processId",
+											"value": null,
+											"description": "Required. ID of the process to query, as returned when the process was started."
+										}
+									]
+								},
+								"description": "Returns the current status of a long-running server process (e.g. bulk import, stats cleanup) by its `processId`. A process can only be viewed by a superuser or by the user who started it; finished processes remain queryable for a limited time."
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel Process",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "{{Current X-CRSF-TOKEN}}",
+										"description": "Use the X-CSRF-TOKEN value from your login",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "authToken={{authToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{Assets_Server_URL}}/services/process/cancel?processId",
+									"host": [
+										"{{Assets_Server_URL}}"
+									],
+									"path": [
+										"services",
+										"process",
+										"cancel"
+									],
+									"query": [
+										{
+											"key": "processId",
+											"value": null,
+											"description": "Required. ID of the process to cancel."
+										}
+									]
+								},
+								"description": "Cancels a running server process by its `processId`. Only works if the process supports cancellation (`cancelable: true` in its status)."
+							},
+							"response": []
+						}
+					],
+					"description": "Track and cancel long-running server processes (e.g. bulk import, stats cleanup). Only a superuser or the user who started a process can view or cancel it."
 				}
-			]
+			],
+			"description": "Calls against the original (legacy) Assets Server /services API \u2014 the JSON-RPC-style REST API available since Assets 6."
 		},
 		{
 			"name": "REST API - Management Console",
@@ -1843,7 +2018,8 @@
 											"disabled": true
 										}
 									]
-								}
+								},
+								"description": "Creates a new asset via the REST API by posting a JSON body with metadata and file details."
 							},
 							"response": []
 						},
@@ -1884,20 +2060,20 @@
 									]
 								},
 								"url": {
-									"raw": "{{Assets_Server_URL}}/api/asset/FPQS2NqxK4xA7D4viFX1z7/original?requestSecret=eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eJxtVNtymzAQ_Rc9u3HsJCXxTKejwMYoBokgkUs7HYbYckqHgAM4l2by710ZG9ukT6Czqz1nL9p3kizr32xGRuT0smRf5p4z-bOgj5k_zbTFeEJ6K4-iTOtUV2T0k4TCg1i6NIQ4CjxBHXRZYQ54oGBzorZigseBF40Zlxs0khCquwDioCw2WOAKJaQrgtj2GHC1wX3K6RjNEPpMSgwmP1tkAMhzDVuTOGeGPehGs12wJyJqz8w3ITASCyKPGq3d6PvK16iEfSmOuOG7RWgKg_ShuG5rIRVVuyVwYtayKXoruPDvWp2RVMKPx6BUi0ngTgw-Zd5WfSBCtVvV-IfgLaEtuMLcV8SmC_ulYNwBycZduJEeIhdrWheChK3utTAasFhSP_DgUw1i2kIh2Jh_uD2OgUNIFebrRv4530nFoYrG1PFZtwGNOpPLBRt3VEg3Ugrbr4Q92dPf8bNDoGY-YsCkRKsHpe11ce3tg6IrOVg3P9jKX5tvQjaB7jwYUif2GJ90o63mukN8A-fduWycI2mihbDbVlt4HqyekSS_emSapTqv1dtC42vFNqBbqZ_sqpyT0TzJKm3Oj0Wt6WxWoot1dDA4PRgeHeLHIhujW1T1f4xJYd62TB9yPYvK7PKlNpTLSpeOrpM0w6f_bjbBdgNEWCAzeLtDaO7ox4SM8mWW4fUcf8lLUcxe0vzBsOSovS6XKFUbW_Nbvy3QrdkI063HfJl3b2eN7aNH0goVEcie0wot1fJ-3zVNUOngqzUYHh6eDYY9kt_PW8A6Q0C_LtbA4ORoeIJiyxRj9JNF2k-qStf9i-BKDvnT6-T4lVrO8XN6cTv4a_VxFT6keZJ9n5Y6qfW1Lqu0yL-tOkA-_gGWQY5c.FbgAlrIr9PUFY3TN-tfWfaoj4L68xie3qZKV_TECt2DphS5Yv666cujJqvKqicUxs3WKyfaUvxJJFJl1DWtkSA&createVersion=true",
+									"raw": "{{Assets_Server_URL}}/api/asset/{{id}}/original?requestSecret={{requestSecret}}&createVersion=true",
 									"host": [
 										"{{Assets_Server_URL}}"
 									],
 									"path": [
 										"api",
 										"asset",
-										"FPQS2NqxK4xA7D4viFX1z7",
+										"{{id}}",
 										"original"
 									],
 									"query": [
 										{
 											"key": "requestSecret",
-											"value": "eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eJxtVNtymzAQ_Rc9u3HsJCXxTKejwMYoBokgkUs7HYbYckqHgAM4l2by710ZG9ukT6Czqz1nL9p3kizr32xGRuT0smRf5p4z-bOgj5k_zbTFeEJ6K4-iTOtUV2T0k4TCg1i6NIQ4CjxBHXRZYQ54oGBzorZigseBF40Zlxs0khCquwDioCw2WOAKJaQrgtj2GHC1wX3K6RjNEPpMSgwmP1tkAMhzDVuTOGeGPehGs12wJyJqz8w3ITASCyKPGq3d6PvK16iEfSmOuOG7RWgKg_ShuG5rIRVVuyVwYtayKXoruPDvWp2RVMKPx6BUi0ngTgw-Zd5WfSBCtVvV-IfgLaEtuMLcV8SmC_ulYNwBycZduJEeIhdrWheChK3utTAasFhSP_DgUw1i2kIh2Jh_uD2OgUNIFebrRv4530nFoYrG1PFZtwGNOpPLBRt3VEg3Ugrbr4Q92dPf8bNDoGY-YsCkRKsHpe11ce3tg6IrOVg3P9jKX5tvQjaB7jwYUif2GJ90o63mukN8A-fduWycI2mihbDbVlt4HqyekSS_emSapTqv1dtC42vFNqBbqZ_sqpyT0TzJKm3Oj0Wt6WxWoot1dDA4PRgeHeLHIhujW1T1f4xJYd62TB9yPYvK7PKlNpTLSpeOrpM0w6f_bjbBdgNEWCAzeLtDaO7ox4SM8mWW4fUcf8lLUcxe0vzBsOSovS6XKFUbW_Nbvy3QrdkI063HfJl3b2eN7aNH0goVEcie0wot1fJ-3zVNUOngqzUYHh6eDYY9kt_PW8A6Q0C_LtbA4ORoeIJiyxRj9JNF2k-qStf9i-BKDvnT6-T4lVrO8XN6cTv4a_VxFT6keZJ9n5Y6qfW1Lqu0yL-tOkA-_gGWQY5c.FbgAlrIr9PUFY3TN-tfWfaoj4L68xie3qZKV_TECt2DphS5Yv666cujJqvKqicUxs3WKyfaUvxJJFJl1DWtkSA"
+											"value": "{{requestSecret}}"
 										},
 										{
 											"key": "",
@@ -1909,7 +2085,8 @@
 											"value": "true"
 										}
 									]
-								}
+								},
+								"description": "Uploads or replaces the original file content for asset {{id}} using a signed `requestSecret` (obtained from a prior create/upload-authorization call). `createVersion=true` stores the upload as a new version rather than overwriting the current one."
 							},
 							"response": []
 						},
@@ -1968,7 +2145,8 @@
 											"description": "The maximum amount of hits to be returned. Default is 10."
 										}
 									]
-								}
+								},
+								"description": "REST equivalent of the legacy Search call \u2014 full-text/metadata search (here for `apollo`) with `from`/`size` pagination, returning JSON asset objects."
 							},
 							"response": []
 						},
@@ -2049,13 +2227,13 @@
 										{
 											"key": "compression",
 											"value": null,
-											"description": "TIFF Compression type, applicable when format=’tif’. Allowed values: uncompressed, packBits, LZW, ZIP and JPEG.",
+											"description": "TIFF Compression type, applicable when format=\u2019tif\u2019. Allowed values: uncompressed, packBits, LZW, ZIP and JPEG.",
 											"disabled": true
 										},
 										{
 											"key": "quality",
 											"value": null,
-											"description": "JPEG compression, applicable when format=’jpg’. The quality is defined a value from 1 to 100.",
+											"description": "JPEG compression, applicable when format=\u2019jpg\u2019. The quality is defined a value from 1 to 100.",
 											"disabled": true
 										},
 										{
@@ -2095,7 +2273,8 @@
 											"disabled": true
 										}
 									]
-								}
+								},
+								"description": "Generates a short-lived, pre-authenticated URL (valid for `validFor` seconds, here 600) for downloading a specific image rendition (`format=jpg`) of asset(s) {{ids}}, without needing to pass session credentials \u2014 useful for embedding in e-mails or external apps."
 							},
 							"response": []
 						},
@@ -2133,7 +2312,8 @@
 											"description": "Number of minutes the URL is valid for. -1 provides a URL that doesn't expire."
 										}
 									]
-								}
+								},
+								"description": "Generates a short-lived, pre-authenticated URL (valid for `validFor` seconds) for downloading the original file of asset(s) {{ids}} without session credentials."
 							},
 							"response": []
 						},
@@ -2171,7 +2351,8 @@
 											"description": "Number of minutes the URL is valid for. -1 provides a URL that doesn't expire."
 										}
 									]
-								}
+								},
+								"description": "Generates a short-lived, pre-authenticated URL (valid for `validFor` seconds) for downloading the preview rendition of asset(s) {{ids}} without session credentials."
 							},
 							"response": []
 						},
@@ -2209,7 +2390,8 @@
 											"description": "Number of minutes the URL is valid for. -1 provides a URL that doesn't expire."
 										}
 									]
-								}
+								},
+								"description": "Generates a short-lived, pre-authenticated URL (valid for `validFor` seconds) for downloading the thumbnail of asset(s) {{ids}} without session credentials."
 							},
 							"response": []
 						},
@@ -2239,7 +2421,8 @@
 										"asset",
 										"{{id}}"
 									]
-								}
+								},
+								"description": "Retrieves the full metadata record for a single asset by {{id}}."
 							},
 							"response": []
 						},
@@ -2270,7 +2453,8 @@
 										"{{id}}",
 										"original"
 									]
-								}
+								},
+								"description": "Downloads the original file for asset {{id}} directly, using the current session's auth."
 							},
 							"response": []
 						},
@@ -2317,7 +2501,8 @@
 										"{{id}}",
 										"original"
 									]
-								}
+								},
+								"description": "Uploads file content for asset {{id}} as multipart form data, replacing the current original."
 							},
 							"response": []
 						},
@@ -2364,7 +2549,8 @@
 										"{{id}}",
 										"original"
 									]
-								}
+								},
+								"description": "Uploads file content for asset {{id}} as a raw PUT body, replacing the current original."
 							},
 							"response": []
 						},
@@ -2385,7 +2571,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{Assets_Server_URL}}/api/asset/{{id}}/original",
+									"raw": "{{Assets_Server_URL}}/api/asset/{{id}}/preview",
 									"host": [
 										"{{Assets_Server_URL}}"
 									],
@@ -2393,9 +2579,10 @@
 										"api",
 										"asset",
 										"{{id}}",
-										"original"
+										"preview"
 									]
-								}
+								},
+								"description": "Downloads the preview rendition for asset {{id}} directly, using the current session's auth."
 							},
 							"response": []
 						},
@@ -2410,7 +2597,7 @@
 										"type": "text"
 									},
 									{
-										"key": "Cooki",
+										"key": "Cookie",
 										"value": "authToken={{authToken}}",
 										"type": "text"
 									}
@@ -2426,11 +2613,13 @@
 										"{{id}}",
 										"thumbnail"
 									]
-								}
+								},
+								"description": "Downloads the thumbnail image for asset {{id}} directly, using the current session's auth."
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "Creating, uploading, downloading, and retrieving individual assets and their derived renditions (original, preview, thumbnail) via the REST API, including short-lived signed URLs for unauthenticated access."
 				},
 				{
 					"name": "Create Sharelink",
@@ -2469,11 +2658,13 @@
 										"api",
 										"sharelink"
 									]
-								}
+								},
+								"description": "REST equivalent of the legacy Create Auth Key call \u2014 creates a Shared Link for external access to one or more assets via the REST API."
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "REST equivalent of the legacy Auth Keys (Sharelinks) folder \u2014 creates Shared Links for external access to assets."
 				},
 				{
 					"name": "Folder",
@@ -2512,7 +2703,8 @@
 										"api",
 										"folder"
 									]
-								}
+								},
+								"description": "Creates a new folder via the REST API, optionally with metadata attached at creation time."
 							},
 							"response": []
 						},
@@ -2561,7 +2753,8 @@
 											"description": "Path to the folder you want"
 										}
 									]
-								}
+								},
+								"description": "Retrieves a folder's details using its full path (e.g. `/Demo Zone/Postman`) instead of its id."
 							},
 							"response": []
 						},
@@ -2622,10 +2815,11 @@
 										{
 											"key": "metadataToReturn",
 											"value": "tags",
-											"description": "Metadata fields to return for folders. Specify ‘all’ to return all available metadata. Specify ‘none’ to return no metadata.\n\nDefault value : all"
+											"description": "Metadata fields to return for folders. Specify \u2018all\u2019 to return all available metadata. Specify \u2018none\u2019 to return no metadata.\n\nDefault value : all"
 										}
 									]
-								}
+								},
+								"description": "Lists the subfolders directly under {{folder_id}}, with pagination (`from`/`size`) and optional metadata fields to return (here `tags`)."
 							},
 							"response": []
 						},
@@ -2686,10 +2880,11 @@
 										{
 											"key": "metadataToReturn",
 											"value": "tags",
-											"description": "Metadata fields to return for folders. Specify ‘all’ to return all available metadata. Specify ‘none’ to return no metadata.\n\nDefault value : all"
+											"description": "Metadata fields to return for folders. Specify \u2018all\u2019 to return all available metadata. Specify \u2018none\u2019 to return no metadata.\n\nDefault value : all"
 										}
 									]
-								}
+								},
+								"description": "Searches for folders by name or metadata (here `name:postman`), with pagination and optional metadata fields to return."
 							},
 							"response": []
 						},
@@ -2731,7 +2926,8 @@
 										"folder",
 										"{{folder_id}}"
 									]
-								}
+								},
+								"description": "Retrieves a single folder's details by {{folder_id}}."
 							},
 							"response": []
 						},
@@ -2770,7 +2966,8 @@
 										"folder",
 										"{{folder_id}}"
 									]
-								}
+								},
+								"description": "Updates the metadata of the folder at {{folder_id}}."
 							},
 							"response": []
 						},
@@ -2809,13 +3006,16 @@
 										"folder",
 										"{{folder_id}}"
 									]
-								}
+								},
+								"description": "Deletes the folder at {{folder_id}}."
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "Full CRUD for folders (create, read by path/id, search, update metadata, delete) via the REST API."
 				}
-			]
+			],
+			"description": "Calls against the newer, purely RESTful Assets API (JSON in/out, standard HTTP verbs), documented in the Management Console's API reference."
 		},
 		{
 			"name": "External processing",
@@ -2855,7 +3055,8 @@
 								"admin",
 								"externalProcessing"
 							]
-						}
+						},
+						"description": "Registers a new External Processing engine \u2014 an external service Assets Server can call out to for asset processing (e.g. AI-based auto-tagging, face/object recognition, or transcoding)."
 					},
 					"response": []
 				},
@@ -2897,7 +3098,8 @@
 								"admin",
 								"externalProcessing"
 							]
-						}
+						},
+						"description": "Lists all registered External Processing engines."
 					},
 					"response": []
 				},
@@ -2940,7 +3142,8 @@
 								"externalProcessing",
 								"{{external_engine_id}}"
 							]
-						}
+						},
+						"description": "Retrieves the configuration of a single External Processing engine by {{external_engine_id}}."
 					},
 					"response": []
 				},
@@ -2980,7 +3183,8 @@
 								"externalProcessing",
 								"{{external_engine_id}}"
 							]
-						}
+						},
+						"description": "Updates the configuration of an existing External Processing engine identified by {{external_engine_id}}."
 					},
 					"response": []
 				},
@@ -3020,7 +3224,8 @@
 								"externalProcessing",
 								"{{external_engine_id}}"
 							]
-						}
+						},
+						"description": "Deletes a single External Processing engine, identified by {{external_engine_id}}."
 					},
 					"response": []
 				},
@@ -3050,7 +3255,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{Assets_Server_URL}}/services/admin/externalProcessing/{{external_engine_id}}",
+							"raw": "{{Assets_Server_URL}}/services/admin/externalProcessing/all",
 							"host": [
 								"{{Assets_Server_URL}}"
 							],
@@ -3058,13 +3263,15 @@
 								"services",
 								"admin",
 								"externalProcessing",
-								"{{external_engine_id}}"
+								"all"
 							]
-						}
+						},
+						"description": "Deletes all registered External Processing engines at once, via the literal `all` path segment \u2014 distinct from deleting a single engine by id."
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Registers and manages External Processing engines \u2014 external services (e.g. AI-based tagging or transcoding) that Assets Server can call out to for asset processing. Marked 'not in final form' in the source README, so treat as subject to change."
 		},
 		{
 			"name": "Metrics",
@@ -3073,15 +3280,9 @@
 					"name": "Get Assets Metrics",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "",
-								"value": "",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "{{Assets_Server_URL}}/services/system/metrics?X-CSRF-TOKEN={{Current X-CRSF-TOKEN}}&Cookie=authToken={{authToken}}",
+							"raw": "{{Assets_Server_URL}}/services/system/metrics",
 							"host": [
 								"{{Assets_Server_URL}}"
 							],
@@ -3089,22 +3290,14 @@
 								"services",
 								"system",
 								"metrics"
-							],
-							"query": [
-								{
-									"key": "X-CSRF-TOKEN",
-									"value": "{{Current X-CRSF-TOKEN}}"
-								},
-								{
-									"key": "Cookie",
-									"value": "authToken={{authToken}}"
-								}
 							]
-						}
+						},
+						"description": "Returns server-level usage metrics for Assets Server. Unauthenticated \u2014 no session cookie or CSRF token required."
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Server-level usage metrics for Assets Server."
 		}
 	],
 	"auth": {
@@ -3112,7 +3305,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "{{Current AUTH-TOKEN}}",
+				"value": "{{authToken}}",
 				"type": "string"
 			}
 		]
@@ -3139,16 +3332,16 @@
 	],
 	"variable": [
 		{
-			"key": "{{Assets_Server_URL}}",
+			"key": "Assets_Server_URL",
 			"value": ""
 		},
 		{
-			"key": "{{username}}",
+			"key": "username",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"key": "{{password}}",
+			"key": "password",
 			"value": "",
 			"type": "string"
 		}
