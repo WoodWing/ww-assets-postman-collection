@@ -15,7 +15,7 @@ Please note that to use this collection you will need to create your Environment
 
 The relationship between the Collection and the Environments is particularly helpful. Environments allows us to create variables, attach values to the variables and then pass the variable value(s) to subsequent calls. The variables can be used calling each individual call within the collection or you can set up a Flow to use them.
 
-In our environment, named 'WoodWing Assets', we have 11 variables:
+In our environment, named 'WoodWing Assets', we have 12 variables:
 
 1. Assets_Server_URL - referenced in the collection as {{Assets_Server_URL}}
 2. username - referenced in the collection as {{username}}
@@ -23,11 +23,12 @@ In our environment, named 'WoodWing Assets', we have 11 variables:
 4. Current X-CRSF-TOKEN - referenced in the collection as {{Current X-CRSF-TOKEN}}
 5. api_user_name - referenced in the collection as {{api_user_name}}
 6. api_password - referenced in the collection as {{api_password}}
-7. authToken - referenced in the collection as {{auth_token}}
+7. authToken - referenced in the collection as {{authToken}}
 8. ids - referenced in the collection as {{ids}} => meant to be an array of Assets IDs
 9. id - referenced in the collection as {{id}} => Individual ID of an asset
 10. folder_id - referenced in the collection as {{folder_id}}
 11. external_engine_id - referenced in the collection as {{external_engine_id}}
+12. requestSecret - referenced in the collection as {{requestSecret}} => signed secret used when uploading/replacing an asset's original file
 
 Here is a short video showing how Collections and Environments work: 
 
@@ -43,7 +44,7 @@ Flows are for the creation of a complete set of calls and responses to the API e
 
 ### Login and Logout
 1. Standard Login and Logout
-3. API Login and Logout Logout
+2. API Login and Logout
 
 ### Metadata Reports
 1. Metadata report call asking for JSON and using a query to get all assets with status of Production
