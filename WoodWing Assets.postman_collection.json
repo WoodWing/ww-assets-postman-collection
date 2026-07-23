@@ -45,9 +45,37 @@
 										"login"
 									]
 								},
-								"description": "Authenticates against Assets Server with {{username}} and {{password}} and starts a session. The response includes serverVersion, userProfile, and a csrfToken \u2014 store the csrfToken as {{Current X-CRSF-TOKEN}} and send it as the X-CSRF-TOKEN header on subsequent write requests in this session."
+								"description": "Authenticates against Assets Server with {{username}} and {{password}} and starts a session. On success, the Tests script automatically stores the csrfToken from the response body as {{Current X-CRSF-TOKEN}} and the authToken cookie (set via Set-Cookie) as {{authToken}} \u2014 no manual copying needed."
 							},
-							"response": []
+							"response": [],
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Login succeeded\", function () {",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(pm.response.json().loginSuccess).to.eql(true);",
+											"});",
+											"",
+											"var data = pm.response.json();",
+											"",
+											"// /services/login returns the CSRF token in the JSON body.",
+											"if (data.csrfToken) {",
+											"    pm.environment.set(\"Current X-CRSF-TOKEN\", data.csrfToken);",
+											"}",
+											"",
+											"// The auth cookie is set via a Set-Cookie header, not the body.",
+											"// Postman's cookie jar picks it up automatically, so read it back here.",
+											"var authTokenCookie = pm.cookies.get(\"authToken\");",
+											"if (authTokenCookie) {",
+											"    pm.environment.set(\"authToken\", authTokenCookie);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							]
 						},
 						{
 							"name": "Logout",
@@ -75,9 +103,25 @@
 										"logout"
 									]
 								},
-								"description": "Ends the session created by Login. Requires the session cookie and the X-CSRF-TOKEN header obtained at login."
+								"description": "Ends the session created by Login. Requires the session cookie and the X-CSRF-TOKEN header obtained at login. On completion, the Tests script clears {{authToken}} and {{Current X-CRSF-TOKEN}} from the environment."
 							},
-							"response": []
+							"response": [],
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Logout succeeded\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.environment.unset(\"authToken\");",
+											"pm.environment.unset(\"Current X-CRSF-TOKEN\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							]
 						}
 					],
 					"description": "Session-based login and logout using a regular username/password credential pair. This flow uses both a session cookie and an X-CSRF-TOKEN header."
@@ -92,8 +136,17 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Login succeeded\", function () {",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(pm.response.json().loginSuccess).to.eql(true);",
+											"});",
+											"",
+											"// apilogin returns authToken directly in the JSON body (unlike /services/login,",
+											"// which sets it via a Set-Cookie header instead).",
 											"var data = pm.response.json();",
-											"pm.environment.set(\"Current AUTH-TOKEN\", data.authToken);"
+											"if (data.authToken) {",
+											"    pm.environment.set(\"authToken\", data.authToken);",
+											"}"
 										],
 										"type": "text/javascript"
 									}
@@ -135,7 +188,7 @@
 										"apilogin"
 									]
 								},
-								"description": "Use this login call when a dedicated API user is available (as opposed to a regular interactive user). Authenticates with {{api_user_name}} / {{api_password}} and returns a session cookie. This flow does not require a CSRF token."
+								"description": "Use this login call when a dedicated API user is available (as opposed to a regular interactive user). Authenticates with {{api_user_name}} / {{api_password}}. Unlike the standard Login call, apilogin returns the authToken directly in the JSON body rather than as a cookie; the Tests script automatically stores it as {{authToken}}. This flow does not require a CSRF token."
 							},
 							"response": []
 						},
@@ -160,9 +213,24 @@
 										"logout"
 									]
 								},
-								"description": "Ends the session created by Login using 'apilogin'. This flow authenticates via the session cookie only \u2014 no CSRF token is required."
+								"description": "Ends the session created by Login using 'apilogin'. This flow authenticates via the session cookie only \u2014 no CSRF token is required. On completion, the Tests script clears {{authToken}} from the environment."
 							},
-							"response": []
+							"response": [],
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Logout succeeded\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.environment.unset(\"authToken\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							]
 						}
 					],
 					"description": "Login and logout using a dedicated API user (api_user_name/api_password). This flow authenticates via the session cookie only; no CSRF token is required."
