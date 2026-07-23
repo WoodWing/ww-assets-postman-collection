@@ -40,6 +40,12 @@ Flows are for the creation of a complete set of calls and responses to the API e
 2. v0.2 - Extensive changes to the collection. All 'Assets' calls are now included in the collection. I've added a variety of variables to an environment and use those variables through the collection. 
 3. v0.3 - Extensive changes to the collection. Added External Processing and Metrics. Added Environment file and description of variables in the Environment file.
 4. v0.4 - ## Comprehensive review and cleanup of the Assets 6 Postman collection
+5. v0.5 - Auto-populate authToken and CSRF token on login/logout
+Adds Tests scripts to the four login/logout requests so {{authToken}} and {{Current X-CRSF-TOKEN}} no longer need to be copied in manually:
+Login (standard): sets {{Current X-CRSF-TOKEN}} from the response body and {{authToken}} from the Set-Cookie header
+Login using 'apilogin': fixes an existing script that was setting {{Current AUTH-TOKEN}} — an orphaned variable nothing else in the collection reads — to instead set {{authToken}}, which is what every Cookie header actually uses
+Logout (standard): clears {{authToken}} and {{Current X-CRSF-TOKEN}} on completion
+Logout use with 'api': clears {{authToken}} on completion
 
 **Endpoint fixes:**
 - Create Auth Key: point at `/services/createAuthKey` instead of `/services/browse` (leftover copy-paste); correct `assetIds` param casing
