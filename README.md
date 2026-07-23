@@ -1,7 +1,7 @@
 # ww-assets-postman-collection
 
 # Description
-This is a Postman collection for working with WoodWing Assets. The collection itself contains, at this time, a subset of the available API calls. Those that are included in the collection are noted below. All of the Assets API documentation can be found here: [Woodwing Helpcenter] (https://helpcenter.woodwing.com/hc/en-us/sections/360008455892-APIs-REST). 
+This is a Postman collection for working with WoodWing Assets. The collection itself contains the complete set of the available API calls. All of the Assets API documentation can be found here: [Woodwing Helpcenter] (https://helpcenter.woodwing.com/hc/en-us/sections/360008455892-APIs-REST). 
 
 In some cases we have added parameters to the calls so that they may be more useful as a starting point. 
 
