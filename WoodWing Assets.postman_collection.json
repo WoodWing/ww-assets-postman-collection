@@ -1204,31 +1204,33 @@
 									}
 								],
 								"url": {
-									"raw": "{{Assets_Server_URL}}/services/?relationType&target1Id&target2Id",
+									"raw": "{{Assets_Server_URL}}/services/createRelation?relationType&target1Id&target2Id",
 									"host": [
 										"{{Assets_Server_URL}}"
 									],
 									"path": [
 										"services",
-										""
+										"createRelation"
 									],
 									"query": [
 										{
 											"key": "relationType",
 											"value": null,
-											"description": "Values include: 'variation'"
+											"description": "Required. Values include: 'contains', 'contained-by' and 'variation'. For a directional type, target1Id is the parent side: with 'contains' it is the collection and target2Id is the asset; 'contained-by' is the reverse, so the two ids swap places."
 										},
 										{
 											"key": "target1Id",
-											"value": null
+											"value": null,
+											"description": "Required. The id of the asset on one side of the relation. For a directional relation type this is the parent side."
 										},
 										{
 											"key": "target2Id",
-											"value": null
+											"value": null,
+											"description": "Required. The id of the asset on the other side of the relation. For a directional relation type this is the child side."
 										}
 									]
 								},
-								"description": "Creates a relationship between two assets (`target1Id` and `target2Id`) of a given `relationType` \u2014 e.g. linking an InDesign layout to an image it uses."
+								"description": "Creates a relationship between two assets (`target1Id` and `target2Id`) of a given `relationType` \u2014 e.g. linking an InDesign layout to an image it uses, or adding an asset to a collection (relationType `contains`, target1Id the collection). If the two assets already have a relation, even of a different type, a new one cannot be created. Returns an empty 200, or a 500 error page on failure."
 							},
 							"response": []
 						},
